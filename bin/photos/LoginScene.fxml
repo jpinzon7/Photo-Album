@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="529.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="photos.LoginSceneController">
+   <children>
+      <Label layoutX="107.0" layoutY="88.0" text="Enter your username for the Photo Library: ">
+         <font>
+            <Font name="Apple Braille" size="16.0" />
+         </font>
+      </Label>
+      <TextField fx:id="usernameInput" layoutX="184.0" layoutY="159.0" promptText="Enter username here" />
+   </children>
+</AnchorPane>
