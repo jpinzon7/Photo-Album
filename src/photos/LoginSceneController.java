@@ -9,6 +9,7 @@ public class LoginSceneController {
 
     @FXML
     private Label label;
+    @FXML
     private TextField usernameInput;
 
     //String username = the text in the username textfield
