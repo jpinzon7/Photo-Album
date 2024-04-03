@@ -1,10 +1,17 @@
 package photos;
 
+import java.io.IOException;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
+import javafx.scene.Node;
 
 public class LoginSceneController {
 
@@ -17,21 +24,34 @@ public class LoginSceneController {
 
     public void login(ActionEvent event) {
         String username = usernameInput.getText();
-        if (username.equals("admin")) { // if the user inputs "admin" as the username, then go to AdminScene
-            Main mainInstance = new Main();
-            mainInstance.switchToAdminScene();
+        if (username.equals("admin")) {
+            try {
+                Parent root = FXMLLoader.load(getClass().getResource("AdminScene.fxml"));
+                Scene adminScene = new Scene(root);
+
+                // Get the current stage and set the new scene on it
+                Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                stage.setScene(adminScene);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         } else if (username.isEmpty()) {
-            // Alert the user that a username is required
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("Username Required");
             alert.setHeaderText(null);
             alert.setContentText("Please enter a username.");
             alert.showAndWait();
         } else {
-            // if the user inputs anything other than admin as the username, then go to
-            // UserScene
-            Main mainInstance = new Main();
-            mainInstance.switchToUserScene();
+            try {
+                Parent root = FXMLLoader.load(getClass().getResource("UserScene.fxml"));
+                Scene userScene = new Scene(root);
+
+                // Get the current stage and set the new scene on it
+                Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                stage.setScene(userScene);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 }
