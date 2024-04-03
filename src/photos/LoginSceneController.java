@@ -25,8 +25,8 @@ public class LoginSceneController {
         String username = usernameInput.getText();
         if (username.equals("admin")) {
             try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("UserScene.fxml"));
-                Parent root = FXMLLoader.load(getClass().getResource("UserScene.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("AdminScene.fxml"));
+                Parent root = loader.load();
                 Scene adminScene = new Scene(root);
 
                 // Get the UserSceneController and set the username
