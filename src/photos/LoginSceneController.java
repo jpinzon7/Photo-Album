@@ -19,15 +19,19 @@ public class LoginSceneController {
     private Label label;
     @FXML
     private TextField usernameInput;
-
     // String username = the text in the username textfield
 
     public void login(ActionEvent event) {
         String username = usernameInput.getText();
         if (username.equals("admin")) {
             try {
-                Parent root = FXMLLoader.load(getClass().getResource("AdminScene.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("UserScene.fxml"));
+                Parent root = FXMLLoader.load(getClass().getResource("UserScene.fxml"));
                 Scene adminScene = new Scene(root);
+
+                // Get the UserSceneController and set the username
+                AdminSceneController adminSceneController = loader.getController();
+                adminSceneController.initialize(username);
 
                 // Get the current stage and set the new scene on it
                 Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -43,8 +47,13 @@ public class LoginSceneController {
             alert.showAndWait();
         } else {
             try {
-                Parent root = FXMLLoader.load(getClass().getResource("UserScene.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("UserScene.fxml"));
+                Parent root = loader.load();
                 Scene userScene = new Scene(root);
+
+                // Get the UserSceneController and set the username
+                UserSceneController userSceneController = loader.getController();
+                userSceneController.initialize(username);
 
                 // Get the current stage and set the new scene on it
                 Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();

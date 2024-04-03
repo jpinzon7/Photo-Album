@@ -7,7 +7,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="photos.UserSceneController">
    <children>
-      <Label layoutX="236.0" layoutY="38.0" text="User's Photo Library">
+      <Label fx:id="userLabel" layoutX="236.0" layoutY="38.0" text="User's Photo Library">
          <font>
             <Font size="15.0" />
          </font>

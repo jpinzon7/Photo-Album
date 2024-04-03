@@ -13,7 +13,8 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("LoginScene.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("LoginScene.fxml"));
+            Parent root = loader.load();
             Scene scene = new Scene(root);
             primaryStage.setTitle("Photo Album");
             primaryStage.setScene(scene);
