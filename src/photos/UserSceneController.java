@@ -1,12 +1,14 @@
 package photos;
 
-import java.io.File;
+import static photos.Utils.DATA_FILE;
+import static photos.Utils.saveUsers;
+import static photos.Utils.USERS;
+import static photos.Utils.CURRENT_USER;
+import static photos.Utils.CURRENT_ALBUMS;
+
 import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.util.ArrayList;
 import java.util.List;
 
 import javafx.fxml.FXML;
@@ -14,72 +16,71 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.TilePane;
 
+/**
+ * This class controls the user scene.
+ *
+ * @author Maxim Vyshnevsky
+ */
 public class UserSceneController {
     @FXML
-    private Label userLabel;
+    private Label userLabel; // The label at the top of the page
     @FXML
-    private TilePane albumPane;
+    private TilePane albumPane; // The TilePane to display the albums
     @FXML
-    private Label albumName;
+    private Label albumName; // The label for the album name
     @FXML
-    private TextField newAlbumName;
+    private TextField newAlbumName; // The text field for the new album name
 
-    private User currentUser;
-    private File file;
-    private List<User> users;
-
+    // Runs after the user logs in
+    // If the user has already logged in and just going back to this page, do not run
     public void initialize(String username) {
-        userLabel.setText("Welcome, " + username + "!");
+        userLabel.setText("Welcome, " + username + "!"); // Top of the page greeting
 
-        file = new File("data/users.dat");
-        users = new ArrayList<>();
-
-        if (file.exists() && file.length() > 0) {
-            try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file))) {
+        // If the file exists and is not empty, read the list of users from it and store it in the users list
+        if (DATA_FILE.exists() && DATA_FILE.length() > 0) {
+            try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(DATA_FILE))) {
                 @SuppressWarnings("unchecked")
                 List<User> readUsers = (List<User>) ois.readObject();
-                users = readUsers;
+                USERS = readUsers;
             } catch (IOException | ClassNotFoundException e) {
                 e.printStackTrace();
             }
         }
 
-        if (users.stream().noneMatch(user -> user.getUsername().equals(username))) {
-            System.out.println("Adding new user");
-            // Add the new user to the list and write it back to the file
-            users.add(new User(username));
-            try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(file))) {
-                oos.writeObject(users);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-            // Update the list of users
-            try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file))) {
-                @SuppressWarnings("unchecked")
-                List<User> readUsers = (List<User>) ois.readObject();
-                users = readUsers;
-            } catch (IOException | ClassNotFoundException e) {
-                e.printStackTrace();
-            }
+        // If the user is not in the list of users, add them
+        if (USERS.stream().noneMatch(user -> user.getUsername().equals(username))) {
+            System.out.println("Adding new user...");
+            USERS.add(new User(username));
+            // Write the user to the data file
+            saveUsers();
         }
 
         // Print the list of users names
-        for (User user : users) {
+        System.out.println("Stored users: {");
+        for (User user : USERS) {
             System.out.println(user.getUsername());
         }
+        System.out.println("}");
 
-        // Load the user's albums
-        currentUser = users.stream().filter(u -> u.getUsername().equals(username)).findFirst().get();
-        System.out.println("CurrentUser: " + currentUser.getUsername());
-        List<Album> albums = currentUser.getAlbums();
-        System.out.println("User has " + albums.size() + " albums");
-        for (Album album : albums) {
+        // Update the current user
+        CURRENT_USER = USERS.stream().filter(u -> u.getUsername().equals(username)).findFirst().get();
+
+        // Print the current user's name
+        System.out.println("CurrentUser: " + CURRENT_USER.getUsername());
+
+        // Update the current user's albums
+        CURRENT_ALBUMS = CURRENT_USER.getAlbums();
+
+        // Print the current user's albums
+        System.out.println("User has " + CURRENT_ALBUMS.size() + " albums");
+        System.out.println("Albums: {");
+        for (Album album : CURRENT_ALBUMS) {
             System.out.println(album.getName());
         }
+        System.out.println("}");
 
         // Load the albums into the TilePane
-        for (Album album : albums) {
+        for (Album album : CURRENT_ALBUMS) {
             String albumName = album.getName();
             System.out.println("Loading album: " + albumName);
             albumPane.getChildren().add(new Label(albumName));
@@ -88,20 +89,15 @@ public class UserSceneController {
 
     // If user clicks on create album button
     public void createAlbum() {
-        // Create a new album
+        // Create a new album with the name from the text field
         Album album = new Album(newAlbumName.getText());
-
         // Add the album to the user's list of albums
-        currentUser.addAlbum(album);
+        CURRENT_USER.addAlbum(album);
 
         // Add the album to the TilePane
         albumPane.getChildren().add(new Label(album.getName()));
 
-        // Write the updated list of users back to the file
-        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(file))) {
-            oos.writeObject(users);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        // Update the data file
+        saveUsers();
     }
 }
