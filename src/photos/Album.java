@@ -3,7 +3,7 @@ package photos;
 import java.io.Serializable;
 import java.util.*;
 
-public class Album {
+public class Album implements Serializable {
     private String name;
     private List<Photo> photos;
 

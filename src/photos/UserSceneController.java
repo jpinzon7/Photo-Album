@@ -25,12 +25,15 @@ public class UserSceneController {
     private TextField newAlbumName;
 
     private User currentUser;
+    private File file;
+    private List<User> users;
 
     public void initialize(String username) {
         userLabel.setText("Welcome, " + username + "!");
 
-        File file = new File("data/users.dat");
-        List<User> users = new ArrayList<>();
+        file = new File("data/users.dat");
+        users = new ArrayList<>();
+
         if (file.exists() && file.length() > 0) {
             try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file))) {
                 @SuppressWarnings("unchecked")
@@ -50,12 +53,30 @@ public class UserSceneController {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+
+            // Update the list of users
+            try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file))) {
+                @SuppressWarnings("unchecked")
+                List<User> readUsers = (List<User>) ois.readObject();
+                users = readUsers;
+            } catch (IOException | ClassNotFoundException e) {
+                e.printStackTrace();
+            }
+        }
+
+        // Print the list of users names
+        for (User user : users) {
+            System.out.println(user.getUsername());
         }
 
         // Load the user's albums
         currentUser = users.stream().filter(u -> u.getUsername().equals(username)).findFirst().get();
+        System.out.println("CurrentUser: " + currentUser.getUsername());
         List<Album> albums = currentUser.getAlbums();
         System.out.println("User has " + albums.size() + " albums");
+        for (Album album : albums) {
+            System.out.println(album.getName());
+        }
 
         // Load the albums into the TilePane
         for (Album album : albums) {
@@ -75,5 +96,12 @@ public class UserSceneController {
 
         // Add the album to the TilePane
         albumPane.getChildren().add(new Label(album.getName()));
+
+        // Write the updated list of users back to the file
+        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(file))) {
+            oos.writeObject(users);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

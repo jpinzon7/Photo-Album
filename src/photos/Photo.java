@@ -2,7 +2,7 @@ package photos;
 
 import java.io.Serializable;
 
-public class Photo {
+public class Photo implements Serializable {
     private String filePath;
 
     public Photo(String filePath) {

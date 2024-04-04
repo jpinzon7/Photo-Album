@@ -24,7 +24,6 @@
          <content>
             <TilePane fx:id="albumPane" prefHeight="357.0" prefWidth="402.0">
                <children>
-                  <Label fx:id="albumName" text="Label" />
                </children>
             </TilePane>
          </content>
