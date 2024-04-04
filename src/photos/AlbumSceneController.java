@@ -15,18 +15,20 @@ public class AlbumSceneController {
     @FXML
     private GridPane gridPane;
 
-    public void addPhoto(Image image, String caption) {
-        ImageView imageView = new ImageView(image);
-        Label label = new Label(caption);
+    public void addPhoto(Photo photo) {
+        Image image = new Image(photo.getFilePath());
+        Label label = new Label(photo.getCaption());
         Button deleteButton = new Button("Delete");
+
         BorderPane borderPane = new BorderPane();
-        borderPane.setCenter(imageView);
+        borderPane.setCenter(new ImageView(image));
         borderPane.setBottom(label);
 
-        // Create a container for the button and align it to the right
         HBox hbox = new HBox(deleteButton);
         hbox.setAlignment(Pos.TOP_RIGHT);
         borderPane.setTop(hbox);
+
+        deleteButton.setOnAction(e -> deletePhoto(borderPane));
 
         int numberOfCells = gridPane.getChildren().size();
         int newRow = numberOfCells / gridPane.getColumnConstraints().size();
@@ -38,5 +40,4 @@ public class AlbumSceneController {
     public void deletePhoto(BorderPane borderPane) {
         gridPane.getChildren().remove(borderPane);
     }
-
 }
