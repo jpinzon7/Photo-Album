@@ -69,6 +69,10 @@ public class LoginSceneController {
             }
         }
     }
+
+    public void exitProgram() {
+        System.exit(0);
+    }
 }
 
 // if username != admin, then go to UserScene

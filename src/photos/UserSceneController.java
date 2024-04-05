@@ -17,7 +17,10 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.TilePane;
+import javafx.stage.Stage;
 import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 
 /**
  * This class controls the user scene.
@@ -119,6 +122,23 @@ public class UserSceneController {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public void logout() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("LoginScene.fxml"));
+            Parent root = loader.load();
+            Scene loginScene = new Scene(root);
+
+            Stage stage = (Stage) userLabel.getScene().getWindow();
+            stage.setScene(loginScene);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void exitProgram() {
+        System.exit(0);
     }
 
     // public void refreshUserScene() {
