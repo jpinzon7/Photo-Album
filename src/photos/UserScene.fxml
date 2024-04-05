@@ -22,13 +22,13 @@
       </HBox>
       <ScrollPane hbarPolicy="NEVER" layoutX="-1.0" layoutY="30.0" prefHeight="480.0" prefWidth="800.0">
          <content>
-            <TilePane fx:id="albumPane" prefHeight="357.0" prefWidth="402.0">
+            <TilePane fx:id="albumPane" prefHeight="357.0" prefWidth="790.0">
                <children>
                </children>
             </TilePane>
          </content>
       </ScrollPane>
-      <TextField fx:id="newAlbumName" layoutX="9.0" layoutY="531.0" promptText="Create new album" />
-      <Button fx:id="newAlbumButton" layoutX="159.0" layoutY="531.0" mnemonicParsing="false" text="Button" onAction="#createAlbum" />
+      <TextField fx:id="newAlbumName" layoutX="9.0" layoutY="531.0" promptText="Album Name" />
+      <Button fx:id="newAlbumButton" layoutX="159.0" layoutY="531.0" mnemonicParsing="false" text="Create new album" onAction="#createAlbum" />
    </children>
 </AnchorPane>

@@ -6,15 +6,19 @@ import static photos.Utils.USERS;
 import static photos.Utils.CURRENT_USER;
 import static photos.Utils.CURRENT_ALBUMS;
 
+import photos.AlbumTileController;
+
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.util.List;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.TilePane;
+import javafx.scene.Node;
 
 /**
  * This class controls the user scene.
@@ -32,11 +36,13 @@ public class UserSceneController {
     private TextField newAlbumName; // The text field for the new album name
 
     // Runs after the user logs in
-    // If the user has already logged in and just going back to this page, do not run
+    // If the user has already logged in and just going back to this page, do not
+    // run
     public void initialize(String username) {
         userLabel.setText("Welcome, " + username + "!"); // Top of the page greeting
 
-        // If the file exists and is not empty, read the list of users from it and store it in the users list
+        // If the file exists and is not empty, read the list of users from it and store
+        // it in the users list
         if (DATA_FILE.exists() && DATA_FILE.length() > 0) {
             try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(DATA_FILE))) {
                 @SuppressWarnings("unchecked")
@@ -81,10 +87,19 @@ public class UserSceneController {
 
         // Load the albums into the TilePane
         for (Album album : CURRENT_ALBUMS) {
-            String albumName = album.getName();
-            System.out.println("Loading album: " + albumName);
-            albumPane.getChildren().add(new Label(albumName));
+            System.out.println("Loading album: " + album.getName());
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("AlbumTile.fxml"));
+            try {
+                Node albumTile = loader.load();
+                AlbumTileController albumTileController = loader.getController();
+                albumTileController.setAlbumName(album.getName());
+                albumTileController.setNumberPhotos(album.getPhotos().size());
+                albumPane.getChildren().add(albumTile);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
+
     }
 
     // If user clicks on create album button
@@ -95,7 +110,17 @@ public class UserSceneController {
         CURRENT_USER.addAlbum(album);
 
         // Add the album to the TilePane
-        albumPane.getChildren().add(new Label(album.getName()));
+        System.out.println("Loading album: " + album.getName());
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("AlbumTile.fxml"));
+        try {
+            Node albumTile = loader.load();
+            AlbumTileController albumTileController = loader.getController();
+            albumTileController.setAlbumName(album.getName());
+            albumTileController.setNumberPhotos(album.getPhotos().size());
+            albumPane.getChildren().add(albumTile);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         // Update the data file
         saveUsers();
