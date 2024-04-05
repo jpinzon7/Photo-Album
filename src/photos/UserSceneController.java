@@ -6,8 +6,6 @@ import static photos.Utils.USERS;
 import static photos.Utils.CURRENT_USER;
 import static photos.Utils.CURRENT_ALBUMS;
 
-import photos.AlbumTileController;
-
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -16,6 +14,7 @@ import java.util.List;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.TilePane;
 import javafx.scene.Node;
@@ -34,6 +33,8 @@ public class UserSceneController {
     private Label albumName; // The label for the album name
     @FXML
     private TextField newAlbumName; // The text field for the new album name
+    @FXML
+    private ScrollPane scrollPane; // The scroll pane for the TilePane
 
     // Runs after the user logs in
     // If the user has already logged in and just going back to this page, do not
@@ -106,13 +107,14 @@ public class UserSceneController {
         saveUsers();
     }
 
+    // Create a tile for the album
     public void tileMaker(Album album) {
         System.out.println("Loading album: " + album.getName());
         FXMLLoader loader = new FXMLLoader(getClass().getResource("AlbumTile.fxml"));
         try {
             Node albumTile = loader.load();
             AlbumTileController albumTileController = loader.getController();
-            albumTileController.initialize(album, albumTile);
+            albumTileController.initialize(album, albumTile, scrollPane);
             albumPane.getChildren().add(albumTile);
         } catch (IOException e) {
             e.printStackTrace();
@@ -127,7 +129,7 @@ public class UserSceneController {
     //     }
     // }
 
-    public TilePane getAlbumPane() {
-        return albumPane;
-    }
+    // public TilePane getAlbumPane() {
+    //     return albumPane;
+    // }
 }

@@ -1,26 +1,24 @@
 package photos;
 
-import photos.UserSceneController;
-import photos.Utils;
-
 import static photos.Utils.CURRENT_USER;
 
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.util.List;
-
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.TilePane;
+import javafx.beans.value.ChangeListener;
 
 
+/**
+ * This class controls the album tile.
+ *
+ * @author Maxim Vyshnevsky
+ */
 public class AlbumTileController {
     @FXML
     private Image albumThumbnail;
@@ -41,14 +39,20 @@ public class AlbumTileController {
 
     private Album album;
     private Node albumTileNode;
+    private ScrollPane scrollPane;
 
-    public void initialize(Album album, Node albumTileNode) {
+    public void initialize(Album album, Node albumTileNode, ScrollPane scrollPane) {
         setAlbum(album);
         setAlbumTileNode(albumTileNode);
+        setScrollPane(scrollPane);
         setAlbumName(album.getName());
         setNumberPhotos(album.getPhotos().size());
         setEarlyDate(album.getEarlyDate());
         setLateDate(album.getLateDate());
+    }
+
+    public void setScrollPane(ScrollPane scrollPane) {
+        this.scrollPane = scrollPane;
     }
 
     public void setAlbum(Album album) {
@@ -83,7 +87,27 @@ public class AlbumTileController {
         CURRENT_USER.getAlbums().remove(album);
         Utils.saveUsers();
 
+        double oldScrollPos = scrollPane.getVvalue();
+
         ((Pane) albumTileNode.getParent()).getChildren().remove(albumTileNode);
+
+        /**
+         * ChangeListener for the scrollbar position
+         * Whenever deleting an album javafx changes the scrollbar position to the top
+         * which is annoying
+         * This listener will keep the scrollbar position at the same place
+         */
+        ChangeListener<Number> listener = new ChangeListener<Number>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+                if (scrollPane.heightProperty().get() != 0) {
+                    scrollPane.setVvalue(oldScrollPos);
+                }
+                scrollPane.vvalueProperty().removeListener(this);
+            }
+        };
+
+        scrollPane.vvalueProperty().addListener(listener);
     }
 
     public void renameAlbum() {
@@ -92,4 +116,4 @@ public class AlbumTileController {
 
         albumName.setText(album.getName());
     }
-}   
+}
