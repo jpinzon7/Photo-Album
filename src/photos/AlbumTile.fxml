@@ -10,9 +10,9 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="200.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="photos.AlbumTileController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="200.0" style="-fx-border-color: black;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="photos.AlbumTileController">
    <children>
-      <HBox alignment="CENTER" prefHeight="162.0" prefWidth="200.0">
+      <HBox alignment="CENTER" layoutY="1.0" prefHeight="161.0" prefWidth="200.0">
          <children>
             <ImageView accessibleRole="BUTTON" fitHeight="162.0" fitWidth="162.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -47,8 +47,8 @@
             <Point3D />
          </rotationAxis>
       </VBox>
-      <Button fx:id="deleteButton" layoutX="56.0" layoutY="270.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="87.0" text="Delete album" textFill="RED" />
+      <Button fx:id="deleteButton" layoutX="56.0" layoutY="270.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="87.0" text="Delete album" textFill="RED" onAction="#deleteAlbum" />
       <TextField fx:id="renameField" layoutX="2.0" layoutY="242.0" prefHeight="25.0" prefWidth="136.0" />
-      <Button fx:id="renameButton" layoutX="139.0" layoutY="242.0" mnemonicParsing="false" text="Rename" />
+      <Button fx:id="renameButton" layoutX="139.0" layoutY="242.0" mnemonicParsing="false" text="Rename" onAction="#renameAlbum" />
    </children>
 </AnchorPane>

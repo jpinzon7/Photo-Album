@@ -87,17 +87,7 @@ public class UserSceneController {
 
         // Load the albums into the TilePane
         for (Album album : CURRENT_ALBUMS) {
-            System.out.println("Loading album: " + album.getName());
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("AlbumTile.fxml"));
-            try {
-                Node albumTile = loader.load();
-                AlbumTileController albumTileController = loader.getController();
-                albumTileController.setAlbumName(album.getName());
-                albumTileController.setNumberPhotos(album.getPhotos().size());
-                albumPane.getChildren().add(albumTile);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            tileMaker(album);
         }
 
     }
@@ -110,19 +100,34 @@ public class UserSceneController {
         CURRENT_USER.addAlbum(album);
 
         // Add the album to the TilePane
+        tileMaker(album);
+
+        // Update the data file
+        saveUsers();
+    }
+
+    public void tileMaker(Album album) {
         System.out.println("Loading album: " + album.getName());
         FXMLLoader loader = new FXMLLoader(getClass().getResource("AlbumTile.fxml"));
         try {
             Node albumTile = loader.load();
             AlbumTileController albumTileController = loader.getController();
-            albumTileController.setAlbumName(album.getName());
-            albumTileController.setNumberPhotos(album.getPhotos().size());
+            albumTileController.initialize(album, albumTile);
             albumPane.getChildren().add(albumTile);
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
 
-        // Update the data file
-        saveUsers();
+    // public void refreshUserScene() {
+    //     System.out.println("Refreshing user scene...");
+    //     albumPane.getChildren().clear();
+    //     for (Album album : CURRENT_ALBUMS) {
+    //         tileMaker(album);
+    //     }
+    // }
+
+    public TilePane getAlbumPane() {
+        return albumPane;
     }
 }
