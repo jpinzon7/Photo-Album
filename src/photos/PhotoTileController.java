@@ -38,6 +38,7 @@ public class PhotoTileController {
 
     public void removePhoto() {
         album.removePhoto(photo);
+        album.removeDate(photo.getDateTaken());
         photo.removeAlbum(album);
         if (photo.getAlbums().isEmpty()) {
             CURRENT_USER.removePhotoFromUser(photo);

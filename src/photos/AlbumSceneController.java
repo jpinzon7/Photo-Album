@@ -8,24 +8,11 @@ import java.io.IOException;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Insets;
-import javafx.geometry.Pos;
+
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.CornerRadii;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.TilePane;
-import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.scene.control.Alert.AlertType;
@@ -76,8 +63,12 @@ public class AlbumSceneController {
                 album.addPhoto(photo);
                 photo.addAlbum(album);
             }
-            displayPhoto(photo);
+
+            // Calculate the new earliest and latest dates
+            album.setDate(photo.getDateTaken());
+
             saveUsers();
+            displayPhoto(photo);
         } else {
             System.out.println("Image file selection cancelled.");
         }

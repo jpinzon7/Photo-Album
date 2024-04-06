@@ -86,6 +86,8 @@ public class UserSceneController {
         System.out.println("Albums: {");
         for (Album album : CURRENT_ALBUMS) {
             System.out.println(album.getName());
+            // System.out.println(album.getEarlyDate());
+            // System.out.println(album.getLateDate());
         }
         System.out.println("}");
 
