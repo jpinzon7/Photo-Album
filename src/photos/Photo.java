@@ -12,7 +12,6 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-
 public class Photo implements Serializable {
     private String uriString;
     private List<Album> inAlbums;
@@ -26,7 +25,8 @@ public class Photo implements Serializable {
 
         try {
             File file = new File(new URI(URI));
-            BasicFileAttributes attr = Files.readAttributes(Paths.get(file.getAbsolutePath()), BasicFileAttributes.class);
+            BasicFileAttributes attr = Files.readAttributes(Paths.get(file.getAbsolutePath()),
+                    BasicFileAttributes.class);
             dateTaken.setTimeInMillis(attr.creationTime().toMillis());
         } catch (URISyntaxException | IOException e) {
             e.printStackTrace();

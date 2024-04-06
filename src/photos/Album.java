@@ -1,5 +1,7 @@
 package photos;
 
+import static photos.Utils.convertIntDateToString;
+
 import java.io.Serializable;
 import java.util.*;
 
@@ -75,12 +77,12 @@ public class Album implements Serializable {
         this.lateDate = convertIntDateToString(this.lateDateInt);
     }
 
-    public String convertIntDateToString(int date) {
-        String dateStr = Integer.toString(date);
-        String year = dateStr.substring(0, 4);
-        String month = dateStr.substring(4, 6);
-        String day = dateStr.substring(6, 8);
-        String formattedDate = month + "/" + day + "/" + year;
-        return formattedDate;
-    }
+    // public String convertIntDateToString(int date) {
+    //     String dateStr = Integer.toString(date);
+    //     String year = dateStr.substring(0, 4);
+    //     String month = dateStr.substring(4, 6);
+    //     String day = dateStr.substring(6, 8);
+    //     String formattedDate = month + "/" + day + "/" + year;
+    //     return formattedDate;
+    // }
 }

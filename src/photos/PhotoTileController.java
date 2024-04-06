@@ -3,15 +3,21 @@ package photos;
 import static photos.Utils.CURRENT_USER;
 import static photos.Utils.saveUsers;
 
+import java.io.IOException;
+
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 
 public class PhotoTileController {
     @FXML
@@ -66,5 +72,22 @@ public class PhotoTileController {
         };
 
         scrollPane.vvalueProperty().addListener(listener);
+    }
+
+    public void switchView() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("PhotoDisplayScene.fxml"));
+            Parent root = loader.load();
+            Scene photoDisplayScene = new Scene(root);
+
+            Stage stage = (Stage) imageThumbnail.getScene().getWindow();
+
+            PhotoDisplaySceneController photoDisplaySceneController = loader.getController();
+            photoDisplaySceneController.initialize(album, album.getPhotos().indexOf(photo));
+
+            stage.setScene(photoDisplayScene);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

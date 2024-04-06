@@ -10,7 +10,7 @@
    <children>
       <HBox alignment="CENTER" layoutY="2.0" prefHeight="196.0" prefWidth="200.0">
          <children>
-            <ImageView fx:id="imageThumbnail" accessibleRole="BUTTON" fitHeight="196.0" fitWidth="196.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="imageThumbnail" accessibleRole="BUTTON" fitHeight="196.0" fitWidth="196.0" pickOnBounds="true" preserveRatio="true" onMouseClicked="#switchView" >
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
