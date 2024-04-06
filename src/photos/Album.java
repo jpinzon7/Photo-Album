@@ -61,6 +61,13 @@ public class Album implements Serializable {
 
     public void removeDate(int date) {
         dateList.remove(dateList.indexOf(date));
+        if (dateList.isEmpty()) {
+            this.earlyDateInt = 99999999;
+            this.lateDateInt = 00000000;
+            this.earlyDate = "00/00/0000";
+            this.lateDate = "00/00/0000";
+            return;
+        }
         Collections.sort(dateList);
         this.earlyDateInt = dateList.get(0);
         this.lateDateInt = dateList.get(dateList.size() - 1);

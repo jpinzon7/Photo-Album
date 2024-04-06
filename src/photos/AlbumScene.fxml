@@ -21,9 +21,11 @@
       </HBox>
       <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" layoutY="30.0" prefHeight="480.0" prefWidth="800.0">
          <content>
-            <TilePane fx:id="photoPane" prefHeight="478.0" prefWidth="800.0" prefColumns="4" />
+            <TilePane fx:id="photoPane" prefColumns="4" prefHeight="478.0" prefWidth="800.0" />
          </content>
       </ScrollPane>
-      <Button layoutX="14.0" layoutY="540.0" mnemonicParsing="false" text="Add photo" onAction="#addPhoto" />
+      <Button layoutX="14.0" layoutY="540.0" mnemonicParsing="false" onAction="#addPhoto" text="Add photo" />
+      <Button layoutX="685.0" layoutY="540.0" mnemonicParsing="false" text="Go back" onAction="#goBack" />
+      <Button layoutX="751.0" layoutY="540.0" mnemonicParsing="false" text="Exit" textFill="RED" onAction="#exitProgram" />
    </children>
 </AnchorPane>

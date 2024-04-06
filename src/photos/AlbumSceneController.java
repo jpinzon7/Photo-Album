@@ -10,10 +10,13 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 
 import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.TilePane;
 import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.scene.control.Alert.AlertType;
 
@@ -84,5 +87,25 @@ public class AlbumSceneController {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public void goBack() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("UserScene.fxml"));
+            Parent root = loader.load();
+            Scene userScene = new Scene(root);
+
+            UserSceneController userSceneController = loader.getController();
+            userSceneController.initialize(CURRENT_USER.getUsername());
+
+            Stage stage = (Stage) photoPane.getScene().getWindow();
+            stage.setScene(userScene);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void exitProgram() {
+        System.exit(0);
     }
 }
