@@ -16,12 +16,13 @@ public class Photo implements Serializable {
     private String uriString;
     private List<Album> inAlbums;
     private Calendar dateTaken;
-    // private String caption;
+    private String caption;
 
     public Photo(String URI) {
         uriString = URI;
         inAlbums = new ArrayList<Album>();
         dateTaken = Calendar.getInstance();
+        caption = "No caption provided.";
 
         try {
             File file = new File(new URI(URI));
@@ -55,7 +56,11 @@ public class Photo implements Serializable {
                 + dateTaken.get(Calendar.DAY_OF_MONTH);
     }
 
-    // public String getCaption() {
-    // return caption;
-    // }
+    public String getCaption() {
+        return caption;
+    }
+
+    public void setCaption(String caption) {
+        this.caption = caption;
+    }
 }

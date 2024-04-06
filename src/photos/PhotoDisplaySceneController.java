@@ -2,11 +2,19 @@ package photos;
 
 import static photos.Utils.convertIntDateToString;
 
+import java.io.IOException;
+
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 public class PhotoDisplaySceneController {
     @FXML
@@ -17,33 +25,42 @@ public class PhotoDisplaySceneController {
     Button rightButton;
     @FXML
     Label dateLabel;
+    @FXML
+    Label captionLabel;
 
     private Album album;
     private int photoIndex;
     private Photo photo;
 
+    private Stage popupStage;
+
     public void initialize(Album album, int photoIndex) {
         this.album = album;
         this.photoIndex = photoIndex;
-        this.photo = album.getPhotos().get(photoIndex);
-        photoView.setImage(new Image(album.getPhotos().get(photoIndex).getURIPath()));
         checkLeftButtonDisable(photoIndex);
         checkRightButtonDisable(photoIndex);
+        setupPicture();
+    }
+
+    public void setupPicture() {
+        photo = album.getPhotos().get(photoIndex);
+        photoView.setImage(new Image(photo.getURIPath()));
         dateLabel.setText(convertIntDateToString(photo.getDateTaken()));
+        captionLabel.setText(photo.getCaption());
     }
 
     public void nextPicture() {
         photoIndex++;
         leftButton.setDisable(false);
         checkRightButtonDisable(photoIndex);
-        photoView.setImage(new Image(album.getPhotos().get(photoIndex).getURIPath()));
+        setupPicture();
     }
 
     public void previousPicture() {
         photoIndex--;
         rightButton.setDisable(false);
         checkLeftButtonDisable(photoIndex);
-        photoView.setImage(new Image(album.getPhotos().get(photoIndex).getURIPath()));
+        setupPicture();
     }
 
     public void checkLeftButtonDisable(int photoIndex) {
@@ -55,6 +72,27 @@ public class PhotoDisplaySceneController {
     public void checkRightButtonDisable(int photoIndex) {
         if (photoIndex == album.getPhotos().size() - 1) {
             rightButton.setDisable(true);
+        }
+    }
+
+    public void newCaption() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("NewCaptionScene.fxml"));
+            popupStage = new Stage();
+
+            Parent root = loader.load(); // Load the FXML file
+
+            NewCaptionSceneController controller = loader.getController(); // Get the controller
+            controller.initialize(photo);
+
+            popupStage.initModality(Modality.APPLICATION_MODAL);
+            popupStage.initStyle(StageStyle.UNDECORATED);
+            popupStage.setScene(new Scene(root));
+            popupStage.showAndWait();
+
+            captionLabel.setText(photo.getCaption());
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }
