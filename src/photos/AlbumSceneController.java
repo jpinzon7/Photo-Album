@@ -13,6 +13,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.TilePane;
 import javafx.stage.FileChooser;
@@ -25,12 +26,14 @@ public class AlbumSceneController {
     private TilePane photoPane;
     @FXML 
     private ScrollPane scrollPane;
-
+    @FXML
+    private Label albumLabel;
 
     private Album album;
 
     public void initialize(Album album) {
         this.album = album;
+        albumLabel.setText("Photo album: " + album.getName());
         for (Photo photo : album.getPhotos()) {
             displayPhoto(photo);
         }

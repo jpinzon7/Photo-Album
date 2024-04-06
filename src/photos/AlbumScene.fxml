@@ -12,7 +12,7 @@
    <children>
       <HBox alignment="CENTER" prefHeight="30.0" prefWidth="800.0">
          <children>
-            <Label fx:id="userLabel" text="Album Name - Photo Album">
+            <Label fx:id="albumLabel" text="Album Name - Photo Album">
                <font>
                   <Font size="15.0" />
                </font>
