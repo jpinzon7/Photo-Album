@@ -2,15 +2,22 @@ package photos;
 
 import static photos.Utils.CURRENT_USER;
 
+import java.io.IOException;
+
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 import javafx.beans.value.ChangeListener;
 
 
@@ -21,7 +28,7 @@ import javafx.beans.value.ChangeListener;
  */
 public class AlbumTileController {
     @FXML
-    private Image albumThumbnail;
+    private ImageView albumThumbnail;
     @FXML
     private Label albumName;
     @FXML
@@ -49,6 +56,10 @@ public class AlbumTileController {
         setNumberPhotos(album.getPhotos().size());
         setEarlyDate(album.getEarlyDate());
         setLateDate(album.getLateDate());
+
+        if (album.getPhotos().size() > 0) {
+            setAlbumThumbnail(album.getPhotos().get(0).getURIPath());
+        }
     }
 
     public void setScrollPane(ScrollPane scrollPane) {
@@ -64,7 +75,7 @@ public class AlbumTileController {
     }
 
     public void setAlbumThumbnail(String path) {
-        albumThumbnail = new Image(path);
+        albumThumbnail.setImage(new Image(path));
     }
 
     public void setAlbumName(String albumName) {
@@ -84,6 +95,12 @@ public class AlbumTileController {
     }
 
     public void deleteAlbum() {
+        for (Photo photo : album.getPhotos()) {
+            photo.removeAlbum(album);
+            if (photo.getAlbums().isEmpty()) {
+                CURRENT_USER.removePhotoFromUser(photo);
+            }
+        }
         CURRENT_USER.getAlbums().remove(album);
         Utils.saveUsers();
 
@@ -115,5 +132,22 @@ public class AlbumTileController {
         Utils.saveUsers();
 
         albumName.setText(album.getName());
+    }
+
+    public void openAlbum() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("AlbumScene.fxml"));
+            Parent root = loader.load();
+            Scene albumScene = new Scene(root);
+
+            Stage stage = (Stage) albumName.getScene().getWindow();
+
+            AlbumSceneController albumSceneController = loader.getController();
+            albumSceneController.initialize(album);
+
+            stage.setScene(albumScene);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

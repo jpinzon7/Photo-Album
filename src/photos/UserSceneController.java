@@ -113,8 +113,8 @@ public class UserSceneController {
     // Create a tile for the album
     public void tileMaker(Album album) {
         System.out.println("Loading album: " + album.getName());
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("AlbumTile.fxml"));
         try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("AlbumTile.fxml"));
             Node albumTile = loader.load();
             AlbumTileController albumTileController = loader.getController();
             albumTileController.initialize(album, albumTile, scrollPane);
