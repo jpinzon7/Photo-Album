@@ -77,9 +77,9 @@ public class Photo implements Serializable {
         }
     }
 
-    public void removeTag(String key, String value) {
+    public void removeTag(String key) {
         if (tags.containsKey(key)) {
-            tags.get(key).remove(value);
+            tags.remove(key);
         }
     }
 

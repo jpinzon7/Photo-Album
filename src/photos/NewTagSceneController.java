@@ -9,7 +9,9 @@ import java.util.Optional;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.TilePane;
 import javafx.stage.Stage;
 import javafx.scene.control.ButtonBar;
 
@@ -25,6 +27,7 @@ public class NewTagSceneController {
 
     private Photo photo;
 
+
     public void initialize(Photo photo) {
         this.photo = photo;
     }
@@ -36,7 +39,8 @@ public class NewTagSceneController {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Location Tag");
             alert.setHeaderText("You already have a location tag");
-            alert.setContentText("If you choose to proceed, your location tag value will be replaced with the new location.");
+            alert.setContentText(
+                    "If you choose to proceed, your location tag value will be replaced with the new location.");
 
             ButtonType cancelBtn = new ButtonType("Cancel", ButtonBar.ButtonData.CANCEL_CLOSE);
             ButtonType proceedBtn = new ButtonType("Proceed");
@@ -49,8 +53,7 @@ public class NewTagSceneController {
                 tags.put("location", List.of(location));
                 saveUsers();
             }
-        }
-        else {
+        } else {
             tags.put("location", List.of(location));
             saveUsers();
         }
@@ -70,7 +73,7 @@ public class NewTagSceneController {
         String tagValue = customTagValue.getText();
         photo.addTag(tagName, tagValue);
         saveUsers();
-        customTagName.clear();
+        customTagValue.clear();
     }
 
     public void goBack() {
