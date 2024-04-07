@@ -55,14 +55,13 @@ public class PhotoDisplaySceneController {
     }
 
     public void showTags() {
-        for (Map.Entry<String, List<String>> entry : photo.getTags().entrySet()) {
+        List<Tag> tags = photo.getTags();
+        for (Tag tag : tags) {
             try {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("TagTile.fxml"));
                 Node tagNode = loader.load();
                 TagTileController controller = loader.getController();
-                String tagName = entry.getKey();
-                List<String> tagValues = entry.getValue();
-                controller.initialize(tagName, tagValues, photo, tagNode, tagScrollPane);
+                controller.initialize(tag.getTagName(), tag.getTagValue(), photo, tagNode, tagScrollPane);
                 tagTilePane.getChildren().add(tagNode);
             } catch (IOException e) {
                 e.printStackTrace();
@@ -75,7 +74,7 @@ public class PhotoDisplaySceneController {
         photoView.setImage(new Image(photo.getURIPath()));
         dateLabel.setText("Date: " + convertIntDateToString(photo.getDateTaken()));
         captionLabel.setText(photo.getCaption());
-        // tagTilePane.getChildren().clear();
+        tagTilePane.getChildren().clear();
         showTags();
     }
 

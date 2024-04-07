@@ -18,14 +18,14 @@ public class Photo implements Serializable {
     private List<Album> inAlbums;
     private Calendar dateTaken;
     private String caption;
-    private HashMap<String, List<String>> tags;
+    private List<Tag> tags;
 
     public Photo(String URI) {
         uriString = URI;
         inAlbums = new ArrayList<Album>();
         dateTaken = Calendar.getInstance();
         caption = "No caption provided.";
-        tags = new HashMap<String, List<String>>();
+        tags = new ArrayList<Tag>();
 
         try {
             File file = new File(new URI(URI));
@@ -67,23 +67,15 @@ public class Photo implements Serializable {
         this.caption = caption;
     }
 
-    public void addTag(String key, String value) {
-        if (tags.containsKey(key)) {
-            tags.get(key).add(value);
-        } else {
-            List<String> values = new ArrayList<String>();
-            values.add(value);
-            tags.put(key, values);
-        }
+    public void addTag(Tag tag) {
+        tags.add(tag);
     }
 
-    public void removeTag(String key) {
-        if (tags.containsKey(key)) {
-            tags.remove(key);
-        }
+    public void removeTag(Tag tag) {
+        tags.remove(tag);
     }
 
-    public HashMap<String, List<String>> getTags() {
+    public List<Tag> getTags() {
         return tags;
     }
 }

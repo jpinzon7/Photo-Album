@@ -34,8 +34,8 @@ public class NewTagSceneController {
 
     public void addLocationTag() {
         String location = locationTextField.getText();
-        HashMap<String, List<String>> tags = photo.getTags();
-        if (tags.containsKey("location")) {
+        List<Tag> tags = photo.getTags();
+        if (tags.stream().anyMatch(tag -> tag.getTagName().equals("location"))) {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Location Tag");
             alert.setHeaderText("You already have a location tag");
@@ -50,11 +50,14 @@ public class NewTagSceneController {
             Optional<ButtonType> result = alert.showAndWait();
             if (result.isPresent() && result.get() == proceedBtn) {
                 // Replace the location tag with the new location
-                tags.put("location", List.of(location));
+                tags.remove(tags.stream().filter(tag -> tag.getTagName().equals("location")).findFirst().get());
+                Tag newLocationTag = new Tag("location", location);
+                tags.add(newLocationTag);
                 saveUsers();
             }
         } else {
-            tags.put("location", List.of(location));
+            Tag locationTag = new Tag("location", location);
+            tags.add(locationTag);
             saveUsers();
         }
 
@@ -63,7 +66,8 @@ public class NewTagSceneController {
 
     public void addPersonTag() {
         String person = personTextField.getText();
-        photo.addTag("person", person);
+        Tag personTag = new Tag("person", person);
+        photo.addTag(personTag);
         saveUsers();
         personTextField.clear();
     }
@@ -71,7 +75,8 @@ public class NewTagSceneController {
     public void addCustomTag() {
         String tagName = customTagName.getText();
         String tagValue = customTagValue.getText();
-        photo.addTag(tagName, tagValue);
+        Tag customTag = new Tag(tagName, tagValue);
+        photo.addTag(customTag);
         saveUsers();
         customTagValue.clear();
     }

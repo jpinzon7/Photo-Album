@@ -40,8 +40,6 @@ public class AlbumSceneController {
         for (Photo photo : album.getPhotos()) {
             displayPhoto(photo);
         }
-
-        Utils.albumScene = anchorPane;
     }
 
     public void addPhoto() {

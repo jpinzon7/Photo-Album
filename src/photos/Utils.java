@@ -16,7 +16,6 @@ public class Utils {
     static List<User> USERS = new ArrayList<>(); // The list of users
     static User CURRENT_USER; // The current user
     static List<Album> CURRENT_ALBUMS; // The current user's albums
-    static AnchorPane albumScene;
 
     // Save the list of users to the data file
     static void saveUsers() {
@@ -27,6 +26,7 @@ public class Utils {
         }
     }
 
+    // Convert a date obtained from Calendar to a string
     public static String convertIntDateToString(int date) {
         String dateStr = Integer.toString(date);
         String year = dateStr.substring(0, 4);

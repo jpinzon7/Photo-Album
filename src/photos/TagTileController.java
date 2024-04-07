@@ -24,7 +24,7 @@ public class TagTileController {
     Node tagNode;
     ScrollPane tagScrollPane;
 
-    public void initialize(String tagName, List<String> tagValues, Photo photo, Node tagNode, ScrollPane tagScrollPane) {
+    public void initialize(String tagName, String tagValues, Photo photo, Node tagNode, ScrollPane tagScrollPane) {
         this.tagName = tagName;
         this.photo = photo;
         this.tagNode = tagNode;
@@ -37,7 +37,8 @@ public class TagTileController {
     }
 
     public void deleteTag() {
-        photo.removeTag(tagName);
+        List<Tag> tags = photo.getTags();
+        tags.remove(tags.stream().filter(tag -> tag.getTagName().equals(tagName)).findFirst().get());
         saveUsers();
 
         double oldScrollPos = tagScrollPane.getVvalue();
