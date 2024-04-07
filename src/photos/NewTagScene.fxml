@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="206.0" prefWidth="361.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="photos.NewTagSceneController">
+   <children>
+      <Label layoutX="8.0" layoutY="12.0" text="Location:" />
+      <Label layoutX="12.0" layoutY="60.0" text="People:" />
+      <TextField fx:id="locationTextField" layoutX="59.0" layoutY="9.0" prefHeight="25.0" prefWidth="178.0" promptText="Type in ONE location at a time" />
+      <Button layoutX="240.0" layoutY="9.0" mnemonicParsing="false" text="Add" onAction="#addLocationTag" />
+      <TextField fx:id="personTextField" layoutX="59.0" layoutY="57.0" prefHeight="25.0" prefWidth="178.0" promptText="Type in ONE person's name" />
+      <Button layoutX="240.0" layoutY="57.0" mnemonicParsing="false" text="Add" onAction="#addPersonTag" />
+      <Label layoutX="11.0" layoutY="101.0" text="Add custom tag:" />
+      <TextField fx:id="customTagName" layoutX="9.0" layoutY="123.0" promptText="Tag name" />
+      <TextField fx:id="customTagValue" layoutX="161.0" layoutY="123.0" promptText="Tag value" />
+      <Button layoutX="313.0" layoutY="123.0" mnemonicParsing="false" text="Add" onAction="#addCustomTag" />
+      <Label alignment="TOP_LEFT" layoutX="9.0" layoutY="154.0" prefHeight="34.0" prefWidth="266.0" text="If you would like to have a custom tag with multiple values, just retype its name and the added value" textFill="#5b5b5b" wrapText="true">
+         <font>
+            <Font size="10.0" />
+         </font>
+      </Label>
+      <Button layoutX="291.0" layoutY="171.0" mnemonicParsing="false" text="Go back" onAction="#goBack" />
+   </children>
+</AnchorPane>

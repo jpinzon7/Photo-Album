@@ -10,6 +10,7 @@ import java.nio.file.Paths;
 import java.nio.file.attribute.BasicFileAttributes;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
 
 public class Photo implements Serializable {
@@ -17,12 +18,14 @@ public class Photo implements Serializable {
     private List<Album> inAlbums;
     private Calendar dateTaken;
     private String caption;
+    private HashMap<String, List<String>> tags;
 
     public Photo(String URI) {
         uriString = URI;
         inAlbums = new ArrayList<Album>();
         dateTaken = Calendar.getInstance();
         caption = "No caption provided.";
+        tags = new HashMap<String, List<String>>();
 
         try {
             File file = new File(new URI(URI));
@@ -62,5 +65,25 @@ public class Photo implements Serializable {
 
     public void setCaption(String caption) {
         this.caption = caption;
+    }
+
+    public void addTag(String key, String value) {
+        if (tags.containsKey(key)) {
+            tags.get(key).add(value);
+        } else {
+            List<String> values = new ArrayList<String>();
+            values.add(value);
+            tags.put(key, values);
+        }
+    }
+
+    public void removeTag(String key, String value) {
+        if (tags.containsKey(key)) {
+            tags.get(key).remove(value);
+        }
+    }
+
+    public HashMap<String, List<String>> getTags() {
+        return tags;
     }
 }

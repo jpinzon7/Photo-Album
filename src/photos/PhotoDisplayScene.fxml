@@ -29,10 +29,10 @@
       <Label layoutX="279.0" layoutY="501.0" text="Caption:" />
       <Label fx:id="captionLabel" alignment="TOP_LEFT" layoutX="328.0" layoutY="501.0" prefHeight="97.0" prefWidth="226.0" text="Label" />
       <Button layoutX="566.0" layoutY="503.0" mnemonicParsing="false" text="Move to a different album" />
-      <Button layoutX="566.0" layoutY="532.0" mnemonicParsing="false" text="Add new tag" />
+      <Button layoutX="566.0" layoutY="532.0" mnemonicParsing="false" text="Add new tag" onAction="#newTag" />
       <Button layoutX="566.0" layoutY="561.0" mnemonicParsing="false" text="Make new caption" onAction="#newCaption" />
-      <Button layoutX="762.0" layoutY="573.0" mnemonicParsing="false" text="Exit" textFill="RED" />
-      <Button layoutX="737.0" layoutY="545.0" mnemonicParsing="false" text="Go back" />
+      <Button layoutX="762.0" layoutY="573.0" mnemonicParsing="false" text="Exit" textFill="RED" onAction="#exitProgram" />
+      <Button layoutX="737.0" layoutY="545.0" mnemonicParsing="false" text="Go back" onAction="#goBack" />
       <Line endX="7.5" endY="99.0" layoutX="553.0" layoutY="501.0" startX="7.5" startY="-15.5" />
    </children>
 </AnchorPane>

@@ -45,7 +45,7 @@ public class PhotoDisplaySceneController {
     public void setupPicture() {
         photo = album.getPhotos().get(photoIndex);
         photoView.setImage(new Image(photo.getURIPath()));
-        dateLabel.setText(convertIntDateToString(photo.getDateTaken()));
+        dateLabel.setText("Date: " + convertIntDateToString(photo.getDateTaken()));
         captionLabel.setText(photo.getCaption());
     }
 
@@ -80,9 +80,9 @@ public class PhotoDisplaySceneController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("NewCaptionScene.fxml"));
             popupStage = new Stage();
 
-            Parent root = loader.load(); // Load the FXML file
+            Parent root = loader.load();
 
-            NewCaptionSceneController controller = loader.getController(); // Get the controller
+            NewCaptionSceneController controller = loader.getController();
             controller.initialize(photo);
 
             popupStage.initModality(Modality.APPLICATION_MODAL);
@@ -94,5 +94,42 @@ public class PhotoDisplaySceneController {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public void newTag() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("NewTagScene.fxml"));
+            popupStage = new Stage();
+
+            Parent root = loader.load();
+
+            NewTagSceneController controller = loader.getController();
+            controller.initialize(photo);
+
+            popupStage.initModality(Modality.APPLICATION_MODAL);
+            popupStage.initStyle(StageStyle.UNDECORATED);
+            popupStage.setScene(new Scene(root));
+            popupStage.showAndWait();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void goBack() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("AlbumScene.fxml"));
+            Parent root = loader.load();
+            AlbumSceneController controller = loader.getController();
+            controller.initialize(album);
+            Scene scene = new Scene(root);
+            Stage stage = (Stage) photoView.getScene().getWindow();
+            stage.setScene(scene);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void exitProgram() {
+        System.exit(0);
     }
 }
