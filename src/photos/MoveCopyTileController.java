@@ -57,6 +57,9 @@ public class MoveCopyTileController {
             if (buttonType == proceedButton) {
                 toAlbum.addPhoto(photo);
                 fromAlbum.removePhoto(photo);
+                toAlbum.setDate(photo.getDateTaken());
+                fromAlbum.removeDate(photo.getDateTaken());
+
                 saveUsers();
 
                 try {
@@ -80,6 +83,7 @@ public class MoveCopyTileController {
 
     public void copy() {
         toAlbum.addPhoto(photo);
+        toAlbum.setDate(photo.getDateTaken());
         saveUsers();
 
         double oldScrollPos = scrollPane.getVvalue();
