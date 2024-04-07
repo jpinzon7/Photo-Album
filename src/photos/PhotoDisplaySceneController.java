@@ -16,6 +16,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.TilePane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -36,6 +37,8 @@ public class PhotoDisplaySceneController {
     ScrollPane tagScrollPane;
     @FXML
     TilePane tagTilePane;
+    @FXML
+    AnchorPane anchorPane;
 
     private Album album;
     private int photoIndex;
@@ -140,6 +143,25 @@ public class PhotoDisplaySceneController {
 
             tagTilePane.getChildren().clear();
             showTags();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void moveCopy() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("MoveCopyScene.fxml"));
+            popupStage = new Stage();
+
+            Parent root = loader.load();
+
+            MoveCopySceneController controller = loader.getController();
+            controller.initialize(photo, album, anchorPane);
+
+            popupStage.initModality(Modality.APPLICATION_MODAL);
+            popupStage.initStyle(StageStyle.UNDECORATED);
+            popupStage.setScene(new Scene(root));
+            popupStage.showAndWait();
         } catch (IOException e) {
             e.printStackTrace();
         }

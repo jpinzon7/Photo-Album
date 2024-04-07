@@ -15,6 +15,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.TilePane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -28,6 +29,8 @@ public class AlbumSceneController {
     private ScrollPane scrollPane;
     @FXML
     private Label albumLabel;
+    @FXML
+    AnchorPane anchorPane;
 
     private Album album;
 
@@ -37,6 +40,8 @@ public class AlbumSceneController {
         for (Photo photo : album.getPhotos()) {
             displayPhoto(photo);
         }
+
+        Utils.albumScene = anchorPane;
     }
 
     public void addPhoto() {

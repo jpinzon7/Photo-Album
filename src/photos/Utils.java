@@ -4,6 +4,8 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import javafx.scene.layout.AnchorPane;
+
 /**
  * A utility class that contains static fields and methods used throughout the application.
  * Some of the variables are used to avoid repeating the same data search operations.
@@ -14,6 +16,7 @@ public class Utils {
     static List<User> USERS = new ArrayList<>(); // The list of users
     static User CURRENT_USER; // The current user
     static List<Album> CURRENT_ALBUMS; // The current user's albums
+    static AnchorPane albumScene;
 
     // Save the list of users to the data file
     static void saveUsers() {
