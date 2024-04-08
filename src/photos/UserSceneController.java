@@ -174,17 +174,16 @@ public class UserSceneController {
         String tagType2 = tagName2Field.getText();
         String tagValue2 = tagValue2Field.getText();
         String operator = operatorChoiceBox.getValue();
+        HashMap<String, Photo> photosMap = CURRENT_USER.getPhotosMap();
 
         List<Photo> matchingPhotos = new ArrayList<>();
-        for (Album album : CURRENT_USER.getAlbums()) {
-            for (Photo photo : album.getPhotos()) {
-                boolean matchesTag1 = photo.hasTag(tagType1, tagValue1);
-                boolean matchesTag2 = photo.hasTag(tagType2, tagValue2);
+        for (Photo photo : photosMap.values()) {
+            boolean matchesTag1 = photo.hasTag(tagType1, tagValue1);
+            boolean matchesTag2 = photo.hasTag(tagType2, tagValue2);
 
-                if (operator.equals("AND") && matchesTag1 && matchesTag2 ||
-                        operator.equals("OR") && (matchesTag1 || matchesTag2)) {
-                    matchingPhotos.add(photo);
-                }
+            if (operator.equals("AND") && matchesTag1 && matchesTag2 ||
+                    operator.equals("OR") && (matchesTag1 || matchesTag2)) {
+                matchingPhotos.add(photo);
             }
         }
 
@@ -195,7 +194,7 @@ public class UserSceneController {
     public void searchPhotosByDate() {
         LocalDate startDate = startDatePicker.getValue();
         LocalDate endDate = endDatePicker.getValue();
-        HashMap <String, Photo> photosMap = CURRENT_USER.getPhotosMap();
+        HashMap<String, Photo> photosMap = CURRENT_USER.getPhotosMap();
 
         List<Photo> matchingPhotos = new ArrayList<>();
         for (Photo photo : photosMap.values()) {
