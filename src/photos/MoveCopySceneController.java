@@ -10,6 +10,14 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.TilePane;
 import javafx.stage.Stage;
 
+/**
+ * Controller for the move/copy scene.
+ * Allows the user to move or copy a photo to another album.
+ * Displays the albums the photo is not in.
+ * Used in the User Scene when the user wants to move or copy a photo.
+ * @author Maxim Vyshnevsky and Jorge Pinzon
+ */
+
 public class MoveCopySceneController {
     @FXML
     ScrollPane scrollPane;

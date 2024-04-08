@@ -24,8 +24,10 @@ import javafx.beans.value.ChangeListener;
 
 /**
  * This class controls the album tile.
- *
- * @author Maxim Vyshnevsky
+ * Allows the user to delete, rename, and open the album.
+ * It also displays the album's thumbnail, name, number of photos, and earliest and latest dates.
+ * It is used in the User Scene to display the user's albums.
+ * @author Maxim Vyshnevsky and Jorge Pinzon
  */
 public class AlbumTileController {
     @FXML

@@ -1,9 +1,15 @@
 package photos;
 
 import static photos.Utils.convertIntDateToString;
-
 import java.io.Serializable;
 import java.util.*;
+
+/**
+ * This class is the model for an Album.
+ * It contains the name of the album, a list of photos, and the earliest and latest dates of the photos.
+ * The dates are stored as integers in the format YYYYMMDD.
+ * @author Maxim Vyshnevsky and Jorge Pinzon
+ */
 
 public class Album implements Serializable {
     private String name;

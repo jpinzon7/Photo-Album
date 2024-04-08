@@ -16,7 +16,11 @@ import javafx.scene.Node;
 
 /**
  * Controller for the login scene.
- * @author Jorge Pinzon, Maxim Vyshnevsky
+ * Allows the user to login as admin or as a user.
+ * If the user is admin, they are taken to the admin scene.
+ * If the user is a regular user, they are taken to the user scene.
+ * If the username is empty, an alert is shown.
+ * @author Jorge Pinzon and Maxim Vyshnevsky
  */
 public class LoginSceneController {
     @FXML

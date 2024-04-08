@@ -18,6 +18,14 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.TilePane;
 import javafx.stage.Stage;
 
+/**
+ * Controller for the search scene.
+ * Allows the user to create a new album from the search results and display the search results.
+ * Used in the User Scene when the user searches for photos.
+ * Contains method to allow user to create album from search results.
+ * @author Maxim Vyshnevsky and Jorge Pinzon
+ */
+
 public class SearchSceneController {
 
     @FXML

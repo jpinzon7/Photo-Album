@@ -8,6 +8,13 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+/**
+ * Main class for the Photo Album application.
+ * Starts the application at the login scene.
+ * Contains methods to switch to the user scene and the admin scene.
+ * @author Maxim Vyshnevsky and Jorge Pinzon
+ */
+
 public class Main extends Application {
     // starts application at login scene
     @Override

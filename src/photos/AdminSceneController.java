@@ -11,14 +11,19 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
-
 import static photos.Utils.USERS;
 import static photos.Utils.saveUsers;
-
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.util.List;
+
+/**
+ * This class is the controller for the Admin Scene.
+ * It handles all the UI and logic for the admin scene.
+ * Allows admin to create and delete users, and shows the list of all current users.
+ * @author Maxim Vyshnevsky and Jorge Pinzon
+ */
 
 public class AdminSceneController {
     @FXML

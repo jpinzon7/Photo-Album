@@ -23,8 +23,9 @@ import javafx.scene.control.Alert.AlertType;
 
 /**
  * Controller for the album scene.
- * 
- * @author Maxim Vyshnevsky
+ * Handles the UI and logic for the album scene.
+ * Allows the user to add photos to the album, display the photos, and go back to the user scene.
+ * @author Maxim Vyshnevsky and Jorge Pinzon
  */
 public class AlbumSceneController {
     @FXML
