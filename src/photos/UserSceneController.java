@@ -113,6 +113,7 @@ public class UserSceneController {
     }
 
     // Create a tile for the album
+    // Tiles are used to display the albums in the TilePane
     public void tileMaker(Album album) {
         System.out.println("Loading album: " + album.getName());
         try {
@@ -126,6 +127,8 @@ public class UserSceneController {
         }
     }
 
+    // If user clicks on logout button
+    // Go back to the login scene
     public void logout() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("LoginScene.fxml"));
@@ -139,19 +142,8 @@ public class UserSceneController {
         }
     }
 
+    // If user clicks on exit button, exit the program
     public void exitProgram() {
         System.exit(0);
     }
-
-    // public void refreshUserScene() {
-    //     System.out.println("Refreshing user scene...");
-    //     albumPane.getChildren().clear();
-    //     for (Album album : CURRENT_ALBUMS) {
-    //         tileMaker(album);
-    //     }
-    // }
-
-    // public TilePane getAlbumPane() {
-    //     return albumPane;
-    // }
 }

@@ -10,7 +10,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
@@ -28,50 +27,36 @@ import javafx.beans.value.ChangeListener;
  */
 public class AlbumTileController {
     @FXML
-    private ImageView albumThumbnail;
+    private ImageView albumThumbnail; // The thumbnail for the album
     @FXML
-    private Label albumName;
+    private Label albumName; // The label for the album name
     @FXML
-    private Label numberPhotos;
+    private Label numberPhotos; // The label for the number of photos in the album
     @FXML
-    private Label earlyDate;
+    private Label earlyDate; // The label for the earliest date in the album
     @FXML
-    private Label lateDate;
+    private Label lateDate; // The label for the latest date in the album
     @FXML
-    private Button deleteButton;
-    @FXML
-    private TextField renameField;
-    @FXML
-    private Button renameButton;
+    private TextField renameField; // The text field to rename the album
 
-    private Album album;
-    private Node albumTileNode;
-    private ScrollPane scrollPane;
+    private Album album; // The album this tile represents
+    private Node albumTileNode; // The node for the album tile
+    private ScrollPane scrollPane; // The scroll pane for the album tile
 
+    // Runs during the the initialization of the User Scene
     public void initialize(Album album, Node albumTileNode, ScrollPane scrollPane) {
-        setAlbum(album);
-        setAlbumTileNode(albumTileNode);
-        setScrollPane(scrollPane);
+        this.album = album;
+        this.albumTileNode = albumTileNode;
+        this.scrollPane = scrollPane;
         setAlbumName(album.getName());
         setNumberPhotos(album.getPhotos().size());
         setEarlyDate(album.getEarlyDate());
         setLateDate(album.getLateDate());
 
+        // If the album has photos, set the thumbnail to the first photo, otherwise it is a default image
         if (album.getPhotos().size() > 0) {
             setAlbumThumbnail(album.getPhotos().get(0).getURIPath());
         }
-    }
-
-    public void setScrollPane(ScrollPane scrollPane) {
-        this.scrollPane = scrollPane;
-    }
-
-    public void setAlbum(Album album) {
-        this.album = album;
-    }
-
-    public void setAlbumTileNode(Node albumTileNode) {
-        this.albumTileNode = albumTileNode;
     }
 
     public void setAlbumThumbnail(String path) {
@@ -94,18 +79,23 @@ public class AlbumTileController {
         this.lateDate.setText(lateDate);
     }
 
+    // If the user clicks on the delete button
     public void deleteAlbum() {
+        // Remove all the photos from the album
+        // If they are not in any other album, remove them from the user
         for (Photo photo : album.getPhotos()) {
             photo.removeAlbum(album);
             if (photo.getAlbums().isEmpty()) {
                 CURRENT_USER.removePhotoFromUser(photo);
             }
         }
+        // Remove the album from the user
         CURRENT_USER.getAlbums().remove(album);
         Utils.saveUsers();
 
         double oldScrollPos = scrollPane.getVvalue();
 
+        // Remove the album tile from the TilePane
         ((Pane) albumTileNode.getParent()).getChildren().remove(albumTileNode);
 
         /**
@@ -127,13 +117,17 @@ public class AlbumTileController {
         scrollPane.vvalueProperty().addListener(listener);
     }
 
+    // If the user clicks on the rename button
     public void renameAlbum() {
+        // Get the new name from the text field and set it as the new name for the album
         album.setName(renameField.getText());
         Utils.saveUsers();
 
         albumName.setText(album.getName());
     }
 
+    // If the user clicks on the thumbnail of the album
+    // Change the scene to the album scene
     public void openAlbum() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("AlbumScene.fxml"));

@@ -15,25 +15,28 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.TilePane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.scene.control.Alert.AlertType;
 
+/**
+ * Controller for the album scene.
+ * 
+ * @author Maxim Vyshnevsky
+ */
 public class AlbumSceneController {
     @FXML
-    private TilePane photoPane;
+    private TilePane photoPane; // The TilePane to display the photos
     @FXML 
-    private ScrollPane scrollPane;
+    private ScrollPane scrollPane; // The scroll pane for the TilePane
     @FXML
-    private Label albumLabel;
-    @FXML
-    AnchorPane anchorPane;
+    private Label albumLabel; // The label for the album name
 
     private Album album;
 
+    // Runs after the user clicks on an album
     public void initialize(Album album) {
         this.album = album;
         albumLabel.setText("Photo album: " + album.getName());
@@ -45,16 +48,18 @@ public class AlbumSceneController {
     public void addPhoto() {
         FileChooser fileChooser = new FileChooser();
         fileChooser.getExtensionFilters()
-                .add(new ExtensionFilter("Image Files", "*.png", "*.bmp", "*.jpeg", "*.gif", "*.jpg"));
+                .add(new ExtensionFilter("Image Files", "*.png", "*.bmp", "*.jpeg", "*.gif"));
         File selectedFile = fileChooser.showOpenDialog(null);
 
         if (selectedFile != null) {
             String imageURI = selectedFile.toURI().toString();
             Photo photo = CURRENT_USER.searchPhoto(imageURI);
+            // Check if the photo already exists in the user's photos
             if (photo != null) {
                 System.out.println("Photo already exists in an album.");
                 // Check if photo is already in the album
                 if (album.getPhotos().contains(photo)) {
+                    // Show an alert if the photo is already in the album
                     Alert alert = new Alert(AlertType.WARNING);
                     alert.setTitle("Duplicate Photo");
                     alert.setHeaderText(null);
@@ -63,10 +68,14 @@ public class AlbumSceneController {
                     return;
                 }
                 else {
+                    // Add the photo to the album
                     album.addPhoto(photo);
+                    // Add the album to the photo
                     photo.addAlbum(album);
                 }
             } else {
+                // Photo does not exist in the user's photos
+                // Create a new photo and add it to the user's photos
                 photo = new Photo(imageURI);
                 CURRENT_USER.addPhotoToUser(photo);
                 album.addPhoto(photo);
@@ -78,11 +87,10 @@ public class AlbumSceneController {
 
             saveUsers();
             displayPhoto(photo);
-        } else {
-            System.out.println("Image file selection cancelled.");
         }
     }
 
+    // Display the photo in the TilePane
     public void displayPhoto(Photo photo) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("PhotoTile.fxml"));
@@ -95,6 +103,8 @@ public class AlbumSceneController {
         }
     }
 
+    // If the user clicks on the Go Back button
+    // Goes back to User Scene
     public void goBack() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("UserScene.fxml"));
@@ -111,6 +121,7 @@ public class AlbumSceneController {
         }
     }
 
+    // If the user clicks on the Exit button, exits the program
     public void exitProgram() {
         System.exit(0);
     }

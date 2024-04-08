@@ -19,17 +19,23 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
+/**
+ * This class controls the photo tile.
+ * 
+ * @author Maxim Vyshnevsky
+ */
 public class PhotoTileController {
     @FXML
-    ImageView imageThumbnail;
+    ImageView imageThumbnail; // The thumbnail for the photo
     @FXML
-    Button removeButton;
+    Button removeButton; // The button to remove the photo
 
     private Photo photo;
     private Album album;
     private Node photoTileNode;
     private ScrollPane scrollPane;
 
+    // Runs during the initialization of the Album Scene
     public void initialize(Photo photo, Album album, Node photoTileNode, ScrollPane scrollPane) {
         this.photo = photo;
         this.album = album;
@@ -42,10 +48,13 @@ public class PhotoTileController {
         imageThumbnail.setImage(image);
     }
 
+    // Runs when the remove button is clicked
     public void removePhoto() {
-        album.removePhoto(photo);
+        album.removePhoto(photo); 
+        // Remove the date of the photo from the album, the earlyDate and lateDate will be updated
         album.removeDate(photo.getDateTaken());
         photo.removeAlbum(album);
+        // If the photo is not in any album, remove it from the user
         if (photo.getAlbums().isEmpty()) {
             CURRENT_USER.removePhotoFromUser(photo);
         }
@@ -53,6 +62,7 @@ public class PhotoTileController {
 
         double oldScrollPos = scrollPane.getVvalue();
 
+        // Remove the photo tile from the album scene
         ((Pane) photoTileNode.getParent()).getChildren().remove(photoTileNode);
 
         /**
@@ -74,6 +84,8 @@ public class PhotoTileController {
         scrollPane.vvalueProperty().addListener(listener);
     }
 
+    // Runs when the user clicks on the photo thumbnail
+    // Switches to the large photo view
     public void switchView() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("PhotoDisplayScene.fxml"));

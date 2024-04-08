@@ -16,7 +16,7 @@
       <HBox alignment="CENTER" layoutY="1.0" prefHeight="161.0" prefWidth="200.0">
          <children>
             <ImageView fx:id="albumThumbnail" accessibleRole="BUTTON" fitHeight="162.0" fitWidth="162.0" pickOnBounds="true" preserveRatio="true" onMouseClicked="#openAlbum" >
-               <Image url="@../../StockPhotos/no_image.jpg" />
+               <Image url="@../../StockPhotos/no_image.jpeg" />
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>

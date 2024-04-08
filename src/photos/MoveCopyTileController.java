@@ -19,9 +19,14 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.layout.AnchorPane;
 
+/**
+ * This class controls the move copy tile.
+ * 
+ * @author Maxim Vyshnevsky
+ */
 public class MoveCopyTileController {
     @FXML
-    Label nameLabel;
+    Label nameLabel; // The label for the album name
 
     private Album fromAlbum;
     private Album toAlbum;
@@ -30,6 +35,7 @@ public class MoveCopyTileController {
     private ScrollPane scrollPane;
     private AnchorPane anchorPane;
 
+    // Runs during the initialization of the MoveCopy Scene
     public void initialize(Album fromAlbum, Album toAlbum, Photo photo, Node albumTileNode, ScrollPane scrollPane, AnchorPane anchorPane) {
         this.fromAlbum = fromAlbum;
         this.toAlbum = toAlbum;
@@ -41,6 +47,8 @@ public class MoveCopyTileController {
         nameLabel.setText(toAlbum.getName());
     }
 
+    // Runs when the move button is clicked
+    // Moves the photo from one album to another
     public void move() {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Move Photo");

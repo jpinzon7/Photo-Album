@@ -11,31 +11,37 @@ import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.TilePane;
 
+/**
+ * This class controls the tag tile.
+ * 
+ * @author Maxim Vyshnevsky
+ */
 public class TagTileController {
     @FXML
-    Label tagNameLabel;
+    Label tagNameLabel; // The label for the tag name
     @FXML
-    Label tagValuesLabel;
+    Label tagValuesLabel; // The label for the tag values
 
     private String tagName;
     private Photo photo;
     Node tagNode;
     ScrollPane tagScrollPane;
 
+    // Runs during the initialization of the Photo Display Scene
     public void initialize(String tagName, String tagValues, Photo photo, Node tagNode, ScrollPane tagScrollPane) {
         this.tagName = tagName;
         this.photo = photo;
         this.tagNode = tagNode;
         this.tagScrollPane = tagScrollPane;
 
-        // Set the tag name
-        // Set the tag values
+        // Set the tag lable name and values
         tagNameLabel.setText(tagName);
         tagValuesLabel.setText(tagValues.toString());
     }
 
+    // Runs when the delete button is clicked
+    // Deletes the tag from the photo
     public void deleteTag() {
         List<Tag> tags = photo.getTags();
         tags.remove(tags.stream().filter(tag -> tag.getTagName().equals(tagName)).findFirst().get());
@@ -43,6 +49,7 @@ public class TagTileController {
 
         double oldScrollPos = tagScrollPane.getVvalue();
 
+        // Remove the tag from the tile pane
         ((Pane) tagNode.getParent()).getChildren().remove(tagNode);
 
         /**

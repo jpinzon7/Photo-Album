@@ -70,18 +70,8 @@ public class LoginSceneController {
         }
     }
 
+    // If user clicks on exit button
     public void exitProgram() {
         System.exit(0);
     }
 }
-
-// if username != admin, then go to UserScene
-
-/*
- * public void initialize() {
- * String javaVersion = System.getProperty("java.version");
- * String javafxVersion = System.getProperty("javafx.version");
- * label.setText("Hello, JavaFX " + javafxVersion + "\nRunning on Java " +
- * javaVersion + ".");
- * }
- */
