@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import javafx.fxml.FXML;
@@ -45,7 +46,7 @@ public class UserSceneController {
     private TextField newAlbumName; // The text field for the new album name
     @FXML
     private ScrollPane scrollPane; // The scroll pane for the TilePane
-     @FXML
+    @FXML
     private TextField tagName1Field;
     @FXML
     private TextField tagValue1Field;
@@ -166,68 +167,64 @@ public class UserSceneController {
         }
     }
 
-
-     @FXML
+    @FXML
     public void searchPhotos() {
         String tagType1 = tagName1Field.getText();
-    String tagValue1 = tagValue1Field.getText();
-    String tagType2 = tagName2Field.getText();
-    String tagValue2 = tagValue2Field.getText();
-    String operator = operatorChoiceBox.getValue();
+        String tagValue1 = tagValue1Field.getText();
+        String tagType2 = tagName2Field.getText();
+        String tagValue2 = tagValue2Field.getText();
+        String operator = operatorChoiceBox.getValue();
 
-    List<Photo> matchingPhotos = new ArrayList<>();
-    for (Album album : CURRENT_USER.getAlbums()) {
-        for (Photo photo : album.getPhotos()) {
-            boolean matchesTag1 = photo.hasTag(tagType1, tagValue1);
-            boolean matchesTag2 = photo.hasTag(tagType2, tagValue2);
+        List<Photo> matchingPhotos = new ArrayList<>();
+        for (Album album : CURRENT_USER.getAlbums()) {
+            for (Photo photo : album.getPhotos()) {
+                boolean matchesTag1 = photo.hasTag(tagType1, tagValue1);
+                boolean matchesTag2 = photo.hasTag(tagType2, tagValue2);
 
-            if (operator.equals("AND") && matchesTag1 && matchesTag2 ||
-                operator.equals("OR") && (matchesTag1 || matchesTag2)) {
-                matchingPhotos.add(photo);
+                if (operator.equals("AND") && matchesTag1 && matchesTag2 ||
+                        operator.equals("OR") && (matchesTag1 || matchesTag2)) {
+                    matchingPhotos.add(photo);
+                }
             }
         }
+
+        switchToSearchScene(matchingPhotos);
     }
 
-    switchToSearchScene(matchingPhotos);
-        }
-    
-
     @FXML
-public void searchPhotosByDate() {
-    LocalDate startDate = startDatePicker.getValue();
-    LocalDate endDate = endDatePicker.getValue();
+    public void searchPhotosByDate() {
+        LocalDate startDate = startDatePicker.getValue();
+        LocalDate endDate = endDatePicker.getValue();
+        HashMap <String, Photo> photosMap = CURRENT_USER.getPhotosMap();
 
-    List<Photo> matchingPhotos = new ArrayList<>();
-    for (Album album : CURRENT_USER.getAlbums()) {
-        for (Photo photo : album.getPhotos()) {
+        List<Photo> matchingPhotos = new ArrayList<>();
+        for (Photo photo : photosMap.values()) {
             int dateTaken = photo.getDateTaken();
             int year = dateTaken / 10000;
             int month = (dateTaken % 10000) / 100;
             int day = dateTaken % 100;
             LocalDate photoDate = LocalDate.of(year, month, day);
             if ((photoDate.isAfter(startDate) || photoDate.isEqual(startDate)) &&
-                (photoDate.isBefore(endDate) || photoDate.isEqual(endDate))) { {
+                    (photoDate.isBefore(endDate) || photoDate.isEqual(endDate))) {
+                {
                     matchingPhotos.add(photo);
                 }
             }
+        }
+
+        switchToSearchScene(matchingPhotos);
+
     }
-
-    switchToSearchScene(matchingPhotos);
-      
-}
-}
-
-
 
     private void switchToSearchScene(List<Photo> searchResults) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("SearchScene.fxml"));
             Parent root = loader.load();
-    
+
             // Get the SearchSceneController and pass the search results to it
             SearchSceneController controller = loader.getController();
             controller.setSearchResults(searchResults);
-    
+
             // Switch the scene
             Stage stage = (Stage) searchButton.getScene().getWindow();
             stage.setScene(new Scene(root));
@@ -235,8 +232,6 @@ public void searchPhotosByDate() {
             e.printStackTrace();
         }
     }
-
-
 
     // If user clicks on logout button
     // Go back to the login scene
@@ -257,5 +252,4 @@ public void searchPhotosByDate() {
     public void exitProgram() {
         System.exit(0);
     }
-    }
-
+}
