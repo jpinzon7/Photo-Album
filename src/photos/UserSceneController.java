@@ -70,8 +70,10 @@ public class UserSceneController {
     // run
     public void initialize(String username) {
         userLabel.setText("Welcome, " + username + "!"); // Top of the page greeting
-        operatorChoiceBox.getItems().addAll("AND", "OR");
-        operatorChoiceBox.setValue("AND");
+        operatorChoiceBox.getItems().addAll("AND", "OR", "");
+        operatorChoiceBox.setValue("");
+        tagName2Field.setDisable(true);
+        tagValue2Field.setDisable(true);
 
         // If the file exists and is not empty, read the list of users from it and store
         // it in the users list
@@ -124,6 +126,15 @@ public class UserSceneController {
             tileMaker(album);
         }
 
+        operatorChoiceBox.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            if ("AND".equals(newValue) || "OR".equals(newValue)) {
+                tagName2Field.setDisable(false);
+                tagValue2Field.setDisable(false);
+            } else {
+                tagName2Field.setDisable(true);
+                tagValue2Field.setDisable(true);
+            }
+        });
     }
 
     // If user clicks on create album button
@@ -181,14 +192,20 @@ public class UserSceneController {
             boolean matchesTag1 = photo.hasTag(tagType1, tagValue1);
             boolean matchesTag2 = photo.hasTag(tagType2, tagValue2);
 
-            if (operator.equals("AND") && matchesTag1 && matchesTag2 ||
-                    operator.equals("OR") && (matchesTag1 || matchesTag2)) {
+            if (operator.equals("") && matchesTag1) {
+                // Disable tagName2Field and tagValue2Field
+                matchingPhotos.add(photo);
+            }
+
+            if ((operator.equals("AND") && matchesTag1 && matchesTag2) ||
+                    (operator.equals("OR") && (matchesTag1 || matchesTag2))) {
                 matchingPhotos.add(photo);
             }
         }
 
         switchToSearchScene(matchingPhotos);
     }
+
 
     @FXML
     public void searchPhotosByDate() {
