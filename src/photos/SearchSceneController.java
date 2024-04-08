@@ -55,7 +55,7 @@ public class SearchSceneController {
         initialize();
     }
 
-    public void displayPhoto(Photo photo) {
+    public void displayPhoto(Photo photo) { //display the actual photos in the search results
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("PhotoTile.fxml"));
             Node photoTile = loader.load();
@@ -90,7 +90,7 @@ public class SearchSceneController {
 
     
     @FXML
-    public void goBack() {
+    public void goBack() { //go back to the user scene when go back button pressed
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("UserScene.fxml"));
             Parent root = loader.load();
@@ -107,7 +107,7 @@ public class SearchSceneController {
     }
 
     @FXML
-    public void exitProgram() {
+    public void exitProgram() { //exit out of application safely
         System.exit(0);
     }
 

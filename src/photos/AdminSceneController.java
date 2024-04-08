@@ -1,5 +1,6 @@
 package photos;
 
+import static photos.Utils.DATA_FILE;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
@@ -14,7 +15,10 @@ import javafx.scene.control.Alert.AlertType;
 import static photos.Utils.USERS;
 import static photos.Utils.saveUsers;
 
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.util.List;
 
 public class AdminSceneController {
     @FXML
@@ -27,6 +31,17 @@ public class AdminSceneController {
     public void initialize(String username) {
         userLabel.setText("Welcome, " + username + "!");
         userList.getItems().clear();
+        // If the file exists and is not empty, read the list of users from it and store
+        // it in the users list
+        if (DATA_FILE.exists() && DATA_FILE.length() > 0) {
+            try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(DATA_FILE))) {
+                @SuppressWarnings("unchecked")
+                List<User> readUsers = (List<User>) ois.readObject();
+                USERS = readUsers;
+            } catch (IOException | ClassNotFoundException e) {
+                e.printStackTrace();
+            }
+        }
         loadUsers();
     }
 
