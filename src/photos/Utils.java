@@ -4,8 +4,6 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import javafx.scene.layout.AnchorPane;
-
 /**
  * A utility class that contains static fields and methods used throughout the application.
  * Some of the variables are used to avoid repeating the same data search operations.

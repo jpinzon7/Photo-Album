@@ -1,6 +1,5 @@
 package photos;
 import java.io.Serializable;
-import java.util.*;
 
 public class Tag implements Serializable {
     private String tagName;

@@ -3,6 +3,7 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.TilePane?>
@@ -26,5 +27,8 @@
       </ScrollPane>
       <Button layoutX="680.0" layoutY="520.0" mnemonicParsing="false" onAction="#goBack" text="Go back" />
       <Button layoutX="749.0" layoutY="520.0" mnemonicParsing="false" onAction="#exitProgram" text="Exit" textFill="RED" />
+      <Label layoutX="31.0" layoutY="525.0" text="Create a new album with photos matching search:" />
+      <TextField fx:id="newAlbumName" layoutX="30.0" layoutY="548.0" promptText="Album name" />
+      <Button layoutX="195.0" layoutY="548.0" mnemonicParsing="false" onAction="#createAlbum" text="Create new album" />
    </children>
 </AnchorPane>

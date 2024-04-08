@@ -84,6 +84,10 @@ public class PhotoTileController {
         scrollPane.vvalueProperty().addListener(listener);
     }
 
+
+    public ImageView getImageThumbnail() {
+        return imageThumbnail;
+    }
     // Runs when the user clicks on the photo thumbnail
     // Switches to the large photo view
     public void switchView() {

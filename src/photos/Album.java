@@ -24,6 +24,24 @@ public class Album implements Serializable {
         lateDate = "00/00/0000";
     }
 
+    public Album(String name, List<Photo> photos) {
+        this.name = name;
+        this.photos = photos;
+        dateList = new ArrayList<Integer>();
+        earlyDateInt = 99999999;
+        lateDateInt = 00000000;
+        earlyDate = "00/00/0000";
+        lateDate = "00/00/0000";
+        for (Photo photo : photos) {
+            dateList.add(photo.getDateTaken());
+        }
+        Collections.sort(dateList);
+        this.earlyDateInt = dateList.get(0);
+        this.lateDateInt = dateList.get(dateList.size() - 1);
+        this.earlyDate = convertIntDateToString(this.earlyDateInt);
+        this.lateDate = convertIntDateToString(this.lateDateInt);
+    }
+
     public String getName() {
         return name;
     }

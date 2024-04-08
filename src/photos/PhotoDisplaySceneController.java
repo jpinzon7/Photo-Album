@@ -4,7 +4,6 @@ import static photos.Utils.convertIntDateToString;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.Map;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;

@@ -2,16 +2,13 @@ package photos;
 
 import static photos.Utils.saveUsers;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
-import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.TilePane;
 import javafx.stage.Stage;
 import javafx.scene.control.ButtonBar;
 
