@@ -5,6 +5,9 @@ import static photos.Utils.saveUsers;
 
 import java.io.File;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,6 +30,7 @@ import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.DatePicker;
 
 /**
  * Controller for the album scene.
@@ -55,6 +59,12 @@ public class AlbumSceneController {
     private ChoiceBox<String> operatorChoiceBox;
     @FXML
     private Button searchButton;
+    @FXML
+    private DatePicker startDatePicker;
+    @FXML
+    private DatePicker endDatePicker;
+    @FXML
+    private Button dateSearchButton;
 
     // Runs after the user clicks on an album
     public void initialize(Album album) {
@@ -126,26 +136,53 @@ public class AlbumSceneController {
     }
 
     @FXML
-public void searchPhotos() {
-    String tagName1 = tagName1Field.getText();
-    String tagValue1 = tagValue1Field.getText();
-    String tagName2 = tagName2Field.getText();
-    String tagValue2 = tagValue2Field.getText();
-    String operator = operatorChoiceBox.getValue();
+    public void searchPhotos() {
+        String tagName1 = tagName1Field.getText();
+        String tagValue1 = tagValue1Field.getText();
+        String tagName2 = tagName2Field.getText();
+        String tagValue2 = tagValue2Field.getText();
+        String operator = operatorChoiceBox.getValue();
+
+        List<Photo> matchingPhotos = new ArrayList<>();
+        for (Photo photo : album.getPhotos()) {
+            boolean matches = false;
+            if (operator.equals("AND")) {
+                matches = photo.hasTag(tagName1, tagValue1) && photo.hasTag(tagName2, tagValue2);
+            } else if (operator.equals("OR")) {
+                matches = photo.hasTag(tagName1, tagValue1) || photo.hasTag(tagName2, tagValue2);
+            }
+            if (matches) {
+                matchingPhotos.add(photo);
+            }
+        }
+        // Clear the TilePane
+        photoPane.getChildren().clear();
+
+        // Add the matching photos to the TilePane
+        for (Photo photo : matchingPhotos) {
+            displayPhoto(photo);
+        }
+    }
+
+    @FXML
+public void searchPhotosByDate() {
+    LocalDate startDate = startDatePicker.getValue();
+    LocalDate endDate = endDatePicker.getValue();
 
     List<Photo> matchingPhotos = new ArrayList<>();
     for (Photo photo : album.getPhotos()) {
-        boolean matches = false;
-        if (operator.equals("AND")) {
-            matches = photo.hasTag(tagName1, tagValue1) && photo.hasTag(tagName2, tagValue2);
-        } else if (operator.equals("OR")) {
-            matches = photo.hasTag(tagName1, tagValue1) || photo.hasTag(tagName2, tagValue2);
-        }
-        if (matches) {
+        int dateTaken = photo.getDateTaken();
+        int year = dateTaken / 10000;
+        int month = (dateTaken % 10000) / 100;
+        int day = dateTaken % 100;
+        LocalDate photoDate = LocalDate.of(year, month, day);
+        if ((photoDate.isAfter(startDate) || photoDate.isEqual(startDate)) &&
+            (photoDate.isBefore(endDate) || photoDate.isEqual(endDate))) {
             matchingPhotos.add(photo);
         }
     }
-     // Clear the TilePane
+
+    // Clear the TilePane
     photoPane.getChildren().clear();
 
     // Add the matching photos to the TilePane
@@ -153,8 +190,6 @@ public void searchPhotos() {
         displayPhoto(photo);
     }
 }
-
-
 
 
 
