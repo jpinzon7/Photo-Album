@@ -13,6 +13,8 @@ import java.util.List;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
@@ -100,6 +102,18 @@ public class UserSceneController {
 
     // If user clicks on create album button
     public void createAlbum() {
+        String newAlbumNameText = newAlbumName.getText();
+
+        // Check if an album with the same name already exists and display alert
+        if (CURRENT_USER.getAlbums().stream().anyMatch(album -> album.getName().equals(newAlbumNameText))) {
+            Alert alert = new Alert(AlertType.WARNING);
+            alert.setTitle("Warning Dialog");
+            alert.setHeaderText(null);
+            alert.setContentText("An album with this name already exists.");
+            alert.showAndWait();
+            return;
+        }
+
         // Create a new album with the name from the text field
         Album album = new Album(newAlbumName.getText());
         // Add the album to the user's list of albums

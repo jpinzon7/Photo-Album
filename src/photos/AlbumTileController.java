@@ -10,6 +10,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
@@ -119,6 +121,22 @@ public class AlbumTileController {
 
     // If the user clicks on the rename button
     public void renameAlbum() {
+        String newAlbumNameText = renameField.getText();
+
+        // Check if an album with the same name already exists
+        if (Utils.USERS.stream()
+            .flatMap(user -> user.getAlbums().stream())
+            .anyMatch(album -> album.getName().equals(newAlbumNameText))) {
+
+            Alert alert = new Alert(AlertType.WARNING);
+            alert.setTitle("Warning Dialog");
+            alert.setHeaderText(null);
+            alert.setContentText("An album with this name already exists.");
+
+            alert.showAndWait();
+            return;
+        }
+
         // Get the new name from the text field and set it as the new name for the album
         album.setName(renameField.getText());
         Utils.saveUsers();
