@@ -47,30 +47,10 @@ public class AlbumSceneController {
 
     private Album album;
 
-    @FXML
-    private TextField tagName1Field;
-    @FXML
-    private TextField tagValue1Field;
-    @FXML
-    private TextField tagName2Field;
-    @FXML
-    private TextField tagValue2Field;
-    @FXML
-    private ChoiceBox<String> operatorChoiceBox;
-    @FXML
-    private Button searchButton;
-    @FXML
-    private DatePicker startDatePicker;
-    @FXML
-    private DatePicker endDatePicker;
-    @FXML
-    private Button dateSearchButton;
 
     // Runs after the user clicks on an album
     public void initialize(Album album) {
         this.album = album;
-        operatorChoiceBox.getItems().addAll("AND", "OR");
-        operatorChoiceBox.setValue("AND");
         albumLabel.setText("Photo album: " + album.getName());
         for (Photo photo : album.getPhotos()) {
             displayPhoto(photo);
@@ -134,64 +114,6 @@ public class AlbumSceneController {
             e.printStackTrace();
         }
     }
-
-    @FXML
-    public void searchPhotos() {
-        String tagName1 = tagName1Field.getText();
-        String tagValue1 = tagValue1Field.getText();
-        String tagName2 = tagName2Field.getText();
-        String tagValue2 = tagValue2Field.getText();
-        String operator = operatorChoiceBox.getValue();
-
-        List<Photo> matchingPhotos = new ArrayList<>();
-        for (Photo photo : album.getPhotos()) {
-            boolean matches = false;
-            if (operator.equals("AND")) {
-                matches = photo.hasTag(tagName1, tagValue1) && photo.hasTag(tagName2, tagValue2);
-            } else if (operator.equals("OR")) {
-                matches = photo.hasTag(tagName1, tagValue1) || photo.hasTag(tagName2, tagValue2);
-            }
-            if (matches) {
-                matchingPhotos.add(photo);
-            }
-        }
-        // Clear the TilePane
-        photoPane.getChildren().clear();
-
-        // Add the matching photos to the TilePane
-        for (Photo photo : matchingPhotos) {
-            displayPhoto(photo);
-        }
-    }
-
-    @FXML
-public void searchPhotosByDate() {
-    LocalDate startDate = startDatePicker.getValue();
-    LocalDate endDate = endDatePicker.getValue();
-
-    List<Photo> matchingPhotos = new ArrayList<>();
-    for (Photo photo : album.getPhotos()) {
-        int dateTaken = photo.getDateTaken();
-        int year = dateTaken / 10000;
-        int month = (dateTaken % 10000) / 100;
-        int day = dateTaken % 100;
-        LocalDate photoDate = LocalDate.of(year, month, day);
-        if ((photoDate.isAfter(startDate) || photoDate.isEqual(startDate)) &&
-            (photoDate.isBefore(endDate) || photoDate.isEqual(endDate))) {
-            matchingPhotos.add(photo);
-        }
-    }
-
-    // Clear the TilePane
-    photoPane.getChildren().clear();
-
-    // Add the matching photos to the TilePane
-    for (Photo photo : matchingPhotos) {
-        displayPhoto(photo);
-    }
-}
-
-
 
     // If the user clicks on the Go Back button
     // Goes back to User Scene

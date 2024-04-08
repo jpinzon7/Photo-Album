@@ -8,11 +8,11 @@
 <?import javafx.scene.layout.TilePane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="photos.AlbumSceneController">
+<AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="photos.SearchSceneController">
    <children>
       <HBox alignment="CENTER" prefHeight="30.0" prefWidth="800.0">
          <children>
-            <Label fx:id="albumLabel" text="Album Name - Photo Album">
+            <Label fx:id="albumLabel" text="Photos Matching Search Criteria">
                <font>
                   <Font size="15.0" />
                </font>
@@ -21,10 +21,9 @@
       </HBox>
       <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" layoutY="30.0" prefHeight="480.0" prefWidth="800.0">
          <content>
-            <TilePane fx:id="photoPane" prefColumns="4" prefHeight="478.0" prefWidth="800.0" />
+            <TilePane fx:id="searchResultsPane" prefColumns="4" prefHeight="478.0" prefWidth="800.0" />
          </content>
       </ScrollPane>
-      <Button layoutX="596.0" layoutY="520.0" mnemonicParsing="false" onAction="#addPhoto" text="Add photo" />
       <Button layoutX="680.0" layoutY="520.0" mnemonicParsing="false" onAction="#goBack" text="Go back" />
       <Button layoutX="749.0" layoutY="520.0" mnemonicParsing="false" onAction="#exitProgram" text="Exit" textFill="RED" />
    </children>

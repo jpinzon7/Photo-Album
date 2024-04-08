@@ -9,15 +9,21 @@ import static photos.Utils.CURRENT_ALBUMS;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.TilePane;
 import javafx.stage.Stage;
 import javafx.scene.Node;
@@ -40,12 +46,32 @@ public class UserSceneController {
     private TextField newAlbumName; // The text field for the new album name
     @FXML
     private ScrollPane scrollPane; // The scroll pane for the TilePane
+     @FXML
+    private TextField tagName1Field;
+    @FXML
+    private TextField tagValue1Field;
+    @FXML
+    private TextField tagName2Field;
+    @FXML
+    private TextField tagValue2Field;
+    @FXML
+    private ChoiceBox<String> operatorChoiceBox;
+    @FXML
+    private Button searchButton;
+    @FXML
+    private DatePicker startDatePicker;
+    @FXML
+    private DatePicker endDatePicker;
+    @FXML
+    private Button dateSearchButton;
 
     // Runs after the user logs in
     // If the user has already logged in and just going back to this page, do not
     // run
     public void initialize(String username) {
         userLabel.setText("Welcome, " + username + "!"); // Top of the page greeting
+        operatorChoiceBox.getItems().addAll("AND", "OR");
+        operatorChoiceBox.setValue("AND");
 
         // If the file exists and is not empty, read the list of users from it and store
         // it in the users list
@@ -141,6 +167,78 @@ public class UserSceneController {
         }
     }
 
+
+     @FXML
+    public void searchPhotos() {
+        String tagType1 = tagName1Field.getText();
+    String tagValue1 = tagValue1Field.getText();
+    String tagType2 = tagName2Field.getText();
+    String tagValue2 = tagValue2Field.getText();
+    String operator = operatorChoiceBox.getValue();
+
+    List<Photo> matchingPhotos = new ArrayList<>();
+    for (Album album : CURRENT_USER.getAlbums()) {
+        for (Photo photo : album.getPhotos()) {
+            boolean matchesTag1 = photo.hasTag(tagType1, tagValue1);
+            boolean matchesTag2 = photo.hasTag(tagType2, tagValue2);
+
+            if (operator.equals("AND") && matchesTag1 && matchesTag2 ||
+                operator.equals("OR") && (matchesTag1 || matchesTag2)) {
+                matchingPhotos.add(photo);
+            }
+        }
+    }
+
+    switchToSearchScene(matchingPhotos);
+        }
+    
+
+    @FXML
+public void searchPhotosByDate() {
+    LocalDate startDate = startDatePicker.getValue();
+    LocalDate endDate = endDatePicker.getValue();
+
+    List<Photo> matchingPhotos = new ArrayList<>();
+    for (Album album : CURRENT_USER.getAlbums()) {
+        for (Photo photo : album.getPhotos()) {
+            int dateTaken = photo.getDateTaken();
+            int year = dateTaken / 10000;
+            int month = (dateTaken % 10000) / 100;
+            int day = dateTaken % 100;
+            LocalDate photoDate = LocalDate.of(year, month, day);
+            if ((photoDate.isAfter(startDate) || photoDate.isEqual(startDate)) &&
+                (photoDate.isBefore(endDate) || photoDate.isEqual(endDate))) { {
+                    matchingPhotos.add(photo);
+                }
+            }
+    }
+
+    switchToSearchScene(matchingPhotos);
+      
+}
+}
+
+
+
+    private void switchToSearchScene(List<Photo> searchResults) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("SearchScene.fxml"));
+            Parent root = loader.load();
+    
+            // Get the SearchSceneController and pass the search results to it
+            SearchSceneController controller = loader.getController();
+            controller.setSearchResults(searchResults);
+    
+            // Switch the scene
+            Stage stage = (Stage) searchButton.getScene().getWindow();
+            stage.setScene(new Scene(root));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+
     // If user clicks on logout button
     // Go back to the login scene
     public void logout() {
@@ -160,4 +258,5 @@ public class UserSceneController {
     public void exitProgram() {
         System.exit(0);
     }
-}
+    }
+
