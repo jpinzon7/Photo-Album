@@ -78,4 +78,14 @@ public class Photo implements Serializable {
     public List<Tag> getTags() {
         return tags;
     }
+
+    public boolean hasTag(String tagName, String tagValue) {
+        for (Tag tag : tags) {
+            if (tag.getTagName().equals(tagName) && tag.getTagValue().equals(tagValue)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
 }
