@@ -113,6 +113,10 @@ public class PhotoDisplaySceneController {
         setupPicture();
     }
 
+    
+    /** 
+     * @param photoIndex
+     */
     // If the photo is the first photo in the album, disable the previous photo button
     public void checkLeftButtonDisable(int photoIndex) {
         if (photoIndex == 0) {

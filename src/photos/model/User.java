@@ -21,6 +21,10 @@ public class User implements Serializable {
         return username;
     }
 
+    
+    /** 
+     * @return List<Album>
+     */
     public List<Album> getAlbums() {
         return albums;
     }

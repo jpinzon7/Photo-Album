@@ -37,6 +37,13 @@ public class PhotoTileController {
     private Node photoTileNode;
     private ScrollPane scrollPane;
 
+    
+    /** 
+     * @param photo
+     * @param album
+     * @param photoTileNode
+     * @param scrollPane
+     */
     // Runs during the initialization of the Album Scene
     public void initialize(Photo photo, Album album, Node photoTileNode, ScrollPane scrollPane) {
         this.photo = photo;

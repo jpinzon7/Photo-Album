@@ -170,6 +170,10 @@ public class UserSceneController {
         saveUsers();
     }
 
+    
+    /** 
+     * @param album
+     */
     // Create a tile for the album
     // Tiles are used to display the albums in the TilePane
     public void tileMaker(Album album) {

@@ -70,6 +70,10 @@ public class SearchSceneController {
         initialize();
     }
 
+    
+    /** 
+     * @param photo
+     */
     public void displayPhoto(Photo photo) { //display the actual photos in the search results
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/photos/view/PhotoTile.fxml"));

@@ -18,6 +18,10 @@ public class Tag implements Serializable {
         return tagName;
     }
 
+    
+    /** 
+     * @param tagName
+     */
     public void setTagName(String tagName) {
         this.tagName = tagName;
     }

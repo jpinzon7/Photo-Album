@@ -45,6 +45,10 @@ public class Photo implements Serializable {
         return uriString;
     }
 
+    
+    /** 
+     * @param album
+     */
     public void addAlbum(Album album) {
         inAlbums.add(album);
     }
