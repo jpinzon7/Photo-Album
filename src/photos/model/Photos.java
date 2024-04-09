@@ -15,7 +15,7 @@ import javafx.stage.Stage;
  * @author Maxim Vyshnevsky and Jorge Pinzon
  */
 
-public class Main extends Application {
+public class Photos extends Application {
     
     /** 
      * @param primaryStage
