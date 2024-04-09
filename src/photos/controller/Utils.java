@@ -10,7 +10,7 @@ import photos.model.User;
 /**
  * A utility class that contains static fields and methods used throughout the application.
  * Some of the variables are used to avoid repeating the same data search operations.
- * @author Maxim Vyshnevsky
+ * @author Maxim Vyshnevsky and Jorge Pinzon
  */
 public class Utils {
     static final File DATA_FILE = new File("data/users.dat"); // The file to store the users
@@ -19,6 +19,9 @@ public class Utils {
     static List<Album> CURRENT_ALBUMS; // The current user's albums
 
     // Save the list of users to the data file
+    /**
+     * Load the list of users to the data file.
+     */
     static void saveUsers() {
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(DATA_FILE))) {
             oos.writeObject(USERS);
@@ -27,12 +30,15 @@ public class Utils {
         }
     }
 
-    
-    /** 
-     * @param date
-     * @return String
-     */
     // Convert a date obtained from Calendar to a string
+    /**
+     * Convert an integer date to a string.
+     * The integer date is obtained from the Calendar class of the Java Standard Library.
+     * The integer date is in the format YYYYMMDD.
+     * The string date is in the format MM/DD/YYYY.
+     * @param date The date to convert
+     * @return The date as a string
+     */
     public static String convertIntDateToString(int date) {
         String dateStr = Integer.toString(date);
         String year = dateStr.substring(0, 4);

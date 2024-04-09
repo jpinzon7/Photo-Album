@@ -34,9 +34,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 
 /**
- * This class controls the user scene.
- *
- * @author Maxim Vyshnevsky
+ * The controller class for the User Scene.
+ * @author Maxim Vyshnevsky and Jorge Pinzon
  */
 public class UserSceneController {
     @FXML
@@ -69,12 +68,19 @@ public class UserSceneController {
     private Button dateSearchButton;
 
     
-    /** 
-     * @param username
-     */
+
     // Runs after the user logs in
     // If the user has already logged in and just going back to this page, do not
     // run
+    /** 
+     * Initializes the User Scene.
+     * Sets the user label, initializes the operator choice box, and disables the second tag fields.
+     * If the data file exists, reads the list of users from it and stores it in the users list.
+     * If the user is not in the list of users, adds them.
+     * Updates the current user and current user's albums.
+     * Loads the albums into the TilePane.
+     * @param username
+     */
     public void initialize(String username) {
         userLabel.setText("Welcome, " + username + "!"); // Top of the page greeting
         operatorChoiceBox.getItems().addAll("AND", "OR", "");
@@ -145,6 +151,10 @@ public class UserSceneController {
     }
 
     // If user clicks on create album button
+    /**
+     * Creates a new album.
+     * This method is called when the create album button is pressed.
+     */
     public void createAlbum() {
         String newAlbumNameText = newAlbumName.getText();
 
@@ -171,11 +181,14 @@ public class UserSceneController {
     }
 
     
-    /** 
-     * @param album
-     */
+
     // Create a tile for the album
     // Tiles are used to display the albums in the TilePane
+    /** 
+     * Creates a tile for the album.
+     * This method is called when the user logs in or creates a new album.
+     * @param album
+     */
     public void tileMaker(Album album) {
         System.out.println("Loading album: " + album.getName());
         try {
@@ -189,6 +202,12 @@ public class UserSceneController {
         }
     }
 
+    /**
+     * Searches for photos with the tags entered in the text fields.
+     * If the operator is AND, searches for photos with both tags.
+     * If the operator is OR, searches for photos with either tag.
+     * If the operator is empty, searches for photos with the first tag.
+     */
     @FXML
     public void searchPhotos() {
         String tagType1 = tagName1Field.getText();
@@ -217,7 +236,9 @@ public class UserSceneController {
         switchToSearchScene(matchingPhotos);
     }
 
-
+    /**
+     * Searches for photos with the dates entered in the date pickers.
+     */
     @FXML
     public void searchPhotosByDate() {
         LocalDate startDate = startDatePicker.getValue();
@@ -243,6 +264,11 @@ public class UserSceneController {
 
     }
 
+    /**
+     * Switches to the search scene.
+     * This method is called when the search button is pressed.
+     * @param searchResults
+     */
     private void switchToSearchScene(List<Photo> searchResults) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/photos/view/SearchScene.fxml"));
@@ -262,6 +288,10 @@ public class UserSceneController {
 
     // If user clicks on logout button
     // Go back to the login scene
+    /**
+     * Logs out the user.
+     * This method is called when the logout button is pressed.
+     */
     public void logout() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/photos/view/LoginScene.fxml"));
@@ -276,6 +306,10 @@ public class UserSceneController {
     }
 
     // If user clicks on exit button, exit the program
+    /**
+     * Exits the program.
+     * This method is called when the exit button is pressed.
+     */
     public void exitProgram() {
         System.exit(0);
     }

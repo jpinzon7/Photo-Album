@@ -25,9 +25,8 @@ import photos.model.Photo;
 import photos.model.Tag;
 
 /**
- * This class controls the photo display scene.
- * 
- * @author Maxim Vyshnevsky
+ * Controller for the photo display scene.
+ * @author Maxim Vyshnevsky and Jorge Pinzon
  */
 public class PhotoDisplaySceneController {
     @FXML
@@ -67,8 +66,11 @@ public class PhotoDisplaySceneController {
         setupPicture();
     }
 
-    // Shows the tags for the photo
     // Runs during the initialization of the scene
+    /**
+     * Shows the tags for the photo.
+     * For each tag, a TagTile is created and added to the tile pane.
+     */
     public void showTags() {
         List<Tag> tags = photo.getTags();
         for (Tag tag : tags) {
@@ -85,7 +87,10 @@ public class PhotoDisplaySceneController {
     }
 
     // Runs when the user initializes the scene or goes to the next or previous photo
-    // Displays the photo, and the date, caption, and tags for the photo
+    /**
+     * Sets up the picture.
+     * Displays the photo, and the date, caption, and tags for the photo.
+     */
     public void setupPicture() {
         photo = album.getPhotos().get(photoIndex);
         photoView.setImage(new Image(photo.getURIPath()));
@@ -97,6 +102,11 @@ public class PhotoDisplaySceneController {
 
     // Runs when the user clicks on the next photo button
     // Increases the photo index and shows the picture at that index, checks if the right button should be disabled
+    /**
+     * Goes to the next picture in the album.
+     * Increases the photo index and shows the picture at that index.
+     * Checks if the right button should be disabled.
+     */
     public void nextPicture() {
         photoIndex++;
         leftButton.setDisable(false);
@@ -106,6 +116,11 @@ public class PhotoDisplaySceneController {
 
     // Runs when the user clicks on the previous photo button
     // Decreases the photo index and shows the picture at that index, checks if the left button should be disabled
+    /**
+     * Goes to the previous picture in the album.
+     * Decreases the photo index and shows the picture at that index.
+     * Checks if the left button should be disabled.
+     */
     public void previousPicture() {
         photoIndex--;
         rightButton.setDisable(false);
@@ -115,16 +130,21 @@ public class PhotoDisplaySceneController {
 
     
     /** 
+     * Checks if the first photo in the album is being displayed.
+     * If it is, disables the previous photo button.
      * @param photoIndex
      */
-    // If the photo is the first photo in the album, disable the previous photo button
     public void checkLeftButtonDisable(int photoIndex) {
         if (photoIndex == 0) {
             leftButton.setDisable(true);
         }
     }
 
-    // If the photo is the last photo in the album, disable the next photo button
+    /**
+     * Checks if the last photo in the album is being displayed.
+     * If it is, disables the next photo button.
+     * @param photoIndex
+     */
     public void checkRightButtonDisable(int photoIndex) {
         if (photoIndex == album.getPhotos().size() - 1) {
             rightButton.setDisable(true);
@@ -132,7 +152,10 @@ public class PhotoDisplaySceneController {
     }
 
     // Runs when the user clicks on the new caption button
-    // It is a pop-up window that allows the user to enter a new caption for the photo
+    /**
+     * Opens a pop-up window to enter a new caption for the photo.
+     * Updates the caption label with the new caption.
+     */
     public void newCaption() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/photos/view/NewCaptionScene.fxml"));
@@ -155,7 +178,10 @@ public class PhotoDisplaySceneController {
     }
 
     // Runs when the user clicks on the new tag button
-    // It is a pop-up window that allows the user to enter a new tag for the photo
+    /**
+     * Opens a pop-up window to enter a new tag for the photo.
+     * Updates the tag tile pane with the new tag.
+     */
     public void newTag() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/photos/view/NewTagScene.fxml"));
@@ -179,7 +205,10 @@ public class PhotoDisplaySceneController {
     }
 
     // Runs when the user clicks on the move/copy button
-    // It is a pop-up window that allows the user to move or copy the photo to another album
+    /**
+     * Opens a pop-up window to move or copy the photo to another album.
+     * Updates the album with the new photo.
+     */
     public void moveCopy() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/photos/view/MoveCopyScene.fxml"));
@@ -200,7 +229,9 @@ public class PhotoDisplaySceneController {
     }
 
     // Runs when the user clicks on the Go Back button
-    // Goes back to the album scene
+    /**
+     * Goes back to the album scene.
+     */
     public void goBack() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/photos/view/AlbumScene.fxml"));
@@ -216,6 +247,9 @@ public class PhotoDisplaySceneController {
     }
 
     // Runs when the user clicks on the Exit button, exits the program
+    /**
+     * Exits the program.
+     */
     public void exitProgram() {
         System.exit(0);
     }

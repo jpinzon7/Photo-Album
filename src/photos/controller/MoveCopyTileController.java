@@ -25,7 +25,7 @@ import javafx.scene.layout.AnchorPane;
  * This class controls the move copy tile.
  * Allows the user to move or copy a photo to another album.
  * It is used in the Move Copy Scene to display the albums the photo is not in.
- * @author Maxim Vyshnevsky
+ * @author Maxim Vyshnevsky and Jorge Pinzon
  */
 public class MoveCopyTileController {
     @FXML

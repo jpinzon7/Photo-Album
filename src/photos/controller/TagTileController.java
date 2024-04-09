@@ -15,9 +15,9 @@ import photos.model.Photo;
 import photos.model.Tag;
 
 /**
- * This class controls the tag tile.
- * 
- * @author Maxim Vyshnevsky
+ * The controller class for the TagTile view.
+ * This class handles the initialization and deletion of tags in the photo display scene.
+ * @author Maxim Vyshnevsky and Jorge Pinzon
  */
 public class TagTileController {
     @FXML
@@ -32,6 +32,7 @@ public class TagTileController {
 
     
     /** 
+     * Initializes the tag tile with the specified tag name, tag values, photo, tag node, and tag scroll pane.
      * @param tagName
      * @param tagValues
      * @param photo
@@ -52,6 +53,10 @@ public class TagTileController {
 
     // Runs when the delete button is clicked
     // Deletes the tag from the photo
+    /**
+     * Deletes the tag from the photo.
+     * Saves the users to the file.
+     */
     public void deleteTag() {
         List<Tag> tags = photo.getTags();
         tags.remove(tags.stream().filter(tag -> tag.getTagName().equals(tagName)).findFirst().get());
@@ -62,12 +67,10 @@ public class TagTileController {
         // Remove the tag from the tile pane
         ((Pane) tagNode.getParent()).getChildren().remove(tagNode);
 
-        /**
-         * ChangeListener for the scrollbar position
-         * Whenever deleting an album javafx changes the scrollbar position to the top
-         * which is annoying
-         * This listener will keep the scrollbar position at the same place
-         */
+        // ChangeListener for the scrollbar position
+        // Whenever deleting an album javafx changes the scrollbar position to the top
+        // which is annoying
+        // This listener will keep the scrollbar position at the same place
         ChangeListener<Number> listener = new ChangeListener<Number>() {
             @Override
             public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {

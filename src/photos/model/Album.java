@@ -11,7 +11,6 @@ import java.util.*;
  * The dates are stored as integers in the format YYYYMMDD.
  * @author Maxim Vyshnevsky and Jorge Pinzon
  */
-
 public class Album implements Serializable {
     private String name;
     private List<Photo> photos;
@@ -24,7 +23,7 @@ public class Album implements Serializable {
     /**
      * Constructor for an Album, with only one parameter
      * Initializes the name of the album and the list of photos.
-     * @param name
+     * @param name The name of the album
      */
 
     public Album(String name) {
@@ -41,8 +40,8 @@ public class Album implements Serializable {
      * Constructor for an Album, with two parameters (extra photos parameter)
      * Initializes the name of the album and the list of photos.
      * Also initializes the earliest and latest dates of the photos.
-     * @param name
-     * @param photos
+     * @param name The name of the album
+     * @param photos The list of photos in the album
      */
     public Album(String name, List<Photo> photos) {
         this.name = name;
@@ -64,7 +63,7 @@ public class Album implements Serializable {
 
     /**
      * Getter for the name of the album.
-     * @return
+     * @return The name of the album
      */
     public String getName() {
         return name;
@@ -72,7 +71,7 @@ public class Album implements Serializable {
 
     /**
      * Setter for the name of the album.
-     * @param name
+     * @param name The name of the album
      */
     public void setName(String name) {
         this.name = name;
@@ -80,7 +79,7 @@ public class Album implements Serializable {
 
     /**
      * Getter for the list of photos in the album.
-     * @return
+     * @return The list of photos in the album
      */
     public List<Photo> getPhotos() {
         return photos;
@@ -88,7 +87,7 @@ public class Album implements Serializable {
 
     /**
      * Adds a photo to the album.
-     * @param photo
+     * @param photo The photo to be added
      */
     public void addPhoto(Photo photo) {
         photos.add(photo);
@@ -96,7 +95,7 @@ public class Album implements Serializable {
 
     /**
      * Removes a photo from the album.
-     * @param photo
+     * @param photo The photo to be removed
      */
     public void removePhoto(Photo photo) {
         photos.remove(photo);
@@ -104,7 +103,7 @@ public class Album implements Serializable {
 
     /**
      * Getter for the earliest date of the photos in the album.
-     * @return
+     * @return The earliest date of the photos in the album
      */
     public String getEarlyDate() {
         return earlyDate;
@@ -112,7 +111,7 @@ public class Album implements Serializable {
 
     /**
      * Getter for the latest date of the photos in the album.
-     * @return
+     * @return The latest date of the photos in the album
      */
     public String getLateDate() {
         return lateDate;
@@ -120,7 +119,7 @@ public class Album implements Serializable {
 
     /**
      * Sets the earliest and latest dates of the photos in the album.
-     * @param earlyDateInt
+     * @param earlyDateInt The earliest date of the photos in the album
      */
     public void setDate(int earlyDateInt) {
         dateList.add(earlyDateInt);
@@ -133,7 +132,7 @@ public class Album implements Serializable {
 
     /**
      * Removes a date from the list of dates in the album.
-     * @param date
+     * @param date The date to be removed
      */
     public void removeDate(int date) {
         dateList.remove(dateList.indexOf(date));

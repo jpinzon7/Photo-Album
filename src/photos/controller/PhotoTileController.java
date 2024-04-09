@@ -21,10 +21,11 @@ import javafx.stage.Stage;
 import photos.model.Album;
 import photos.model.Photo;
 
+
 /**
- * This class controls the photo tile.
- * 
- * @author Maxim Vyshnevsky
+ * The controller class for the photo tile in the album scene.
+ * It handles the display and interaction of a single photo tile.
+ * @author Maxim Vyshnevsky and Jorge Pinzon
  */
 public class PhotoTileController {
     @FXML
@@ -37,14 +38,15 @@ public class PhotoTileController {
     private Node photoTileNode;
     private ScrollPane scrollPane;
 
-    
-    /** 
-     * @param photo
-     * @param album
-     * @param photoTileNode
-     * @param scrollPane
+    /**
+     * Initializes the photo tile controller with the specified photo, album, photo tile node, and scroll pane.
+     * This method is called during the initialization of the album scene.
+     *
+     * @param photo          The photo associated with the photo tile.
+     * @param album          The album that contains the photo.
+     * @param photoTileNode  The JavaFX node representing the photo tile.
+     * @param scrollPane     The scroll pane that contains the photo tiles.
      */
-    // Runs during the initialization of the Album Scene
     public void initialize(Photo photo, Album album, Node photoTileNode, ScrollPane scrollPane) {
         this.photo = photo;
         this.album = album;
@@ -53,20 +55,34 @@ public class PhotoTileController {
         setImageThumbnail(new Image(photo.getURIPath()));
     }
 
+    /**
+     * Sets the image thumbnail for the photo tile.
+     *
+     * @param image The image to be set as the thumbnail.
+     */
     public void setImageThumbnail(Image image) {
         imageThumbnail.setImage(image);
     }
 
-    // Runs when the remove button is clicked
+    /**
+     * Removes the photo from the album and updates the necessary data.
+     * This method is called when the remove button is clicked.
+     */
     public void removePhoto() {
-        album.removePhoto(photo); 
+        // Remove the photo from the album
+        album.removePhoto(photo);
+
         // Remove the date of the photo from the album, the earlyDate and lateDate will be updated
         album.removeDate(photo.getDateTaken());
+
+        // Remove the album reference from the photo
         photo.removeAlbum(album);
+
         // If the photo is not in any album, remove it from the user
         if (photo.getAlbums().isEmpty()) {
             CURRENT_USER.removePhotoFromUser(photo);
         }
+
         saveUsers();
 
         double oldScrollPos = scrollPane.getVvalue();
@@ -74,12 +90,9 @@ public class PhotoTileController {
         // Remove the photo tile from the album scene
         ((Pane) photoTileNode.getParent()).getChildren().remove(photoTileNode);
 
-        /**
-         * ChangeListener for the scrollbar position
-         * Whenever deleting an album javafx changes the scrollbar position to the top
-         * which is annoying
-         * This listener will keep the scrollbar position at the same place
-         */
+        // ChangeListener for the scrollbar position
+        // Whenever deleting an album, JavaFX changes the scrollbar position to the top
+        // This listener will keep the scrollbar position at the same place
         ChangeListener<Number> listener = new ChangeListener<Number>() {
             @Override
             public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
@@ -93,12 +106,18 @@ public class PhotoTileController {
         scrollPane.vvalueProperty().addListener(listener);
     }
 
-
+    /**
+     * Gets the image thumbnail of the photo tile.
+     *
+     * @return The image thumbnail.
+     */
     public ImageView getImageThumbnail() {
         return imageThumbnail;
     }
-    // Runs when the user clicks on the photo thumbnail
-    // Switches to the large photo view
+
+    /**
+     * Switches to the large photo view when the user clicks on the photo thumbnail.
+     */
     public void switchView() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/photos/view/PhotoDisplayScene.fxml"));

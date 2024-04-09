@@ -17,10 +17,14 @@ import javafx.stage.Stage;
 
 public class Photos extends Application {
     
-    /** 
-     * @param primaryStage
-     */
     // starts application at login scene
+    /**
+        * This method is called when the application is started.
+        * It loads the LoginScene.fxml file, sets it as the root of the scene,
+        * and displays the scene on the primary stage.
+        *
+        * @param primaryStage the primary stage of the application
+        */
     @Override
     public void start(Stage primaryStage) {
         try {

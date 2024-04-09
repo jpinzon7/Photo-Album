@@ -13,27 +13,36 @@ import photos.model.Photo;
  * Contains methods to allow user to set a new caption for a photo or cancel the operation.
  * @author Maxim Vyshnevsky and Jorge Pinzon
  */
+/**
+ * Controller class for the new caption scene.
+ */
 public class NewCaptionSceneController {
     @FXML
     private TextArea textArea;
 
     private Photo photo;
 
-    
-    /** 
+    /**
      * Initializes the new caption scene with the photo.
-     * @param photo
+     * 
+     * @param photo The photo to be captioned.
      */
     public void initialize(Photo photo) {
         this.photo = photo;
     }
 
+    /**
+     * Sets the caption for the photo and performs necessary actions.
+     */
     public void setCaption() {
         photo.setCaption(textArea.getText());
         textArea.getScene().getWindow().hide();
         saveUsers();
     }
 
+    /**
+     * Cancels the captioning process and closes the scene.
+     */
     public void cancel() {
         textArea.getScene().getWindow().hide();
     }
