@@ -28,6 +28,13 @@ public class MoveCopySceneController {
     private Album fromAlbum;
     private AnchorPane anchorPane;
 
+    /**
+     * Initializes the move/copy scene with the photo, album, and anchor pane.
+     * Displays the albums the photo is not in.
+     * @param photo
+     * @param album
+     * @param anchorPane
+     */
     public void initialize(Photo photo, Album album, AnchorPane anchorPane) {
         this.photo = photo;
         this.fromAlbum = album;
@@ -35,6 +42,10 @@ public class MoveCopySceneController {
         displayAlbums();
     }
 
+    /**
+     * Displays the albums the photo is not in.
+     * For each album, a MoveCopyTile is created and added to the tile pane.
+     */
     public void displayAlbums() {
         for (Album album : Utils.CURRENT_ALBUMS) {
             if (!album.getPhotos().contains(photo)) {
@@ -51,6 +62,9 @@ public class MoveCopySceneController {
         }
     }
 
+    /**
+     * Closes the move/copy scene.
+     */
     public void goBack() {
         Stage stage = (Stage) scrollPane.getScene().getWindow();
         stage.close();

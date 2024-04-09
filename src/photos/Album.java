@@ -20,6 +20,12 @@ public class Album implements Serializable {
     private String lateDate;
     private List<Integer> dateList;
 
+    /**
+     * Constructor for an Album, with only one parameter
+     * Initializes the name of the album and the list of photos.
+     * @param name
+     */
+
     public Album(String name) {
         this.name = name;
         photos = new ArrayList<Photo>();
@@ -30,6 +36,13 @@ public class Album implements Serializable {
         lateDate = "00/00/0000";
     }
 
+    /**
+     * Constructor for an Album, with two parameters (extra photos parameter)
+     * Initializes the name of the album and the list of photos.
+     * Also initializes the earliest and latest dates of the photos.
+     * @param name
+     * @param photos
+     */
     public Album(String name, List<Photo> photos) {
         this.name = name;
         this.photos = photos;
@@ -48,34 +61,66 @@ public class Album implements Serializable {
         this.lateDate = convertIntDateToString(this.lateDateInt);
     }
 
+    /**
+     * Getter for the name of the album.
+     * @return
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * Setter for the name of the album.
+     * @param name
+     */
     public void setName(String name) {
         this.name = name;
     }
 
+    /**
+     * Getter for the list of photos in the album.
+     * @return
+     */
     public List<Photo> getPhotos() {
         return photos;
     }
 
+    /**
+     * Adds a photo to the album.
+     * @param photo
+     */
     public void addPhoto(Photo photo) {
         photos.add(photo);
     }
 
+    /**
+     * Removes a photo from the album.
+     * @param photo
+     */
     public void removePhoto(Photo photo) {
         photos.remove(photo);
     }
 
+    /**
+     * Getter for the earliest date of the photos in the album.
+     * @return
+     */
     public String getEarlyDate() {
         return earlyDate;
     }
 
+    /**
+     * Getter for the latest date of the photos in the album.
+     * @return
+     */
     public String getLateDate() {
         return lateDate;
     }
 
+    /**
+     * Sets the earliest and latest dates of the photos in the album.
+     * @param earlyDateInt
+     */
     public void setDate(int earlyDateInt) {
         dateList.add(earlyDateInt);
         Collections.sort(dateList);
@@ -85,6 +130,10 @@ public class Album implements Serializable {
         this.lateDate = convertIntDateToString(this.lateDateInt);
     }
 
+    /**
+     * Removes a date from the list of dates in the album.
+     * @param date
+     */
     public void removeDate(int date) {
         dateList.remove(dateList.indexOf(date));
         if (dateList.isEmpty()) {
@@ -100,13 +149,4 @@ public class Album implements Serializable {
         this.earlyDate = convertIntDateToString(this.earlyDateInt);
         this.lateDate = convertIntDateToString(this.lateDateInt);
     }
-
-    // public String convertIntDateToString(int date) {
-    //     String dateStr = Integer.toString(date);
-    //     String year = dateStr.substring(0, 4);
-    //     String month = dateStr.substring(4, 6);
-    //     String day = dateStr.substring(6, 8);
-    //     String formattedDate = month + "/" + day + "/" + year;
-    //     return formattedDate;
-    // }
 }

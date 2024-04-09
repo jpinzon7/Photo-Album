@@ -28,7 +28,13 @@ public class LoginSceneController {
     @FXML
     private TextField usernameInput;
 
-    // Runs when the login button is clicked
+    /**
+     * Method to login as admin or user.
+     * If the username is admin, go to the admin scene.
+     * If the username is empty, show an alert.
+     * If the username is not admin, go to the user scene.
+     * @param event
+     */
     public void login(ActionEvent event) {
         String username = usernameInput.getText(); // Get the username from the text field
         if (username.equals("admin")) { // If the username is admin, go to the admin scene
@@ -74,7 +80,9 @@ public class LoginSceneController {
         }
     }
 
-    // If user clicks on exit button
+    /**
+     * Method to exit the program.
+     */
     public void exitProgram() {
         System.exit(0);
     }

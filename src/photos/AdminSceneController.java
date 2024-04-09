@@ -33,6 +33,13 @@ public class AdminSceneController {
     @FXML
     private TextField newUserField; // TextField to input the name of a new user
 
+
+    /**
+     * Initializes the admin scene with the username of the admin.
+     * Shows the list of all current users.
+     * If the file exists and is not empty, reads the list of users from it and stores it in the users list.
+     * @param username
+     */
     public void initialize(String username) {
         userLabel.setText("Welcome, " + username + "!");
         userList.getItems().clear();
@@ -50,7 +57,10 @@ public class AdminSceneController {
         loadUsers();
     }
 
-    // Load the list of users into the ListView
+    /**
+     * Saves the list of users to the file.
+     * If the file does not exist, it is created.
+     */
     private void loadUsers() {
         userList.getItems().clear();
         for (User user : USERS) {
@@ -58,7 +68,11 @@ public class AdminSceneController {
         }
     }
 
-    // Create a new user
+    /**
+     * Creates a new user with the username entered in the text field.
+     * If a user with the same username already exists, shows a warning dialog.
+     * Otherwise, adds the new user to the list of users and saves the list of users to the file.
+     */
     public void createUser() {
         String newUsername = newUserField.getText();
 
@@ -78,7 +92,11 @@ public class AdminSceneController {
         loadUsers();
     }
 
-    // Delete the selected user
+    /**
+     * Deletes the user selected in the list of users.
+     * If no user is selected, does nothing.
+     * Otherwise, removes the user from the list of users and saves the list of users to the file.
+     */
     public void deleteUser() {
         String selectedUsername = userList.getSelectionModel().getSelectedItem();
 
@@ -89,8 +107,9 @@ public class AdminSceneController {
         }
     }
 
-   // If user clicks on logout button
-    // Go back to the login scene
+   /**
+    * Logs out the admin and goes back to the login scene.
+    */
     public void logout() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("LoginScene.fxml"));
@@ -104,7 +123,9 @@ public class AdminSceneController {
         }
     }
 
-    // If user clicks on exit button, exit the program
+    /**
+     * Exits the program safely
+     */
     public void exitProgram() {
         System.exit(0);
     }

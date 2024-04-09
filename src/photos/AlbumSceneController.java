@@ -28,6 +28,7 @@ import javafx.scene.control.Alert.AlertType;
  * @author Maxim Vyshnevsky and Jorge Pinzon
  */
 public class AlbumSceneController {
+
     @FXML
     private TilePane photoPane; // The TilePane to display the photos
     @FXML 
@@ -38,7 +39,11 @@ public class AlbumSceneController {
     private Album album;
 
 
-    // Runs after the user clicks on an album
+    /**
+	 * Initalizes the album scene with the name of the album and the photos in the album.
+	 * @param album
+	 */
+
     public void initialize(Album album) {
         this.album = album;
         albumLabel.setText("Photo album: " + album.getName());
@@ -47,12 +52,18 @@ public class AlbumSceneController {
         }
     }
 
+    /**
+     * Adds a photo to the album.
+     * If the photo already exists in the user's photos, it is added to the album.
+     * If the photo does not exist in the user's photos, a new photo is created and added to the album.
+     * The earliest and latest dates of the album are updated if necessary.
+     */
+
     public void addPhoto() {
         FileChooser fileChooser = new FileChooser();
         fileChooser.getExtensionFilters()
                 .add(new ExtensionFilter("Image Files", "*.png", "*.bmp", "*.jpeg", "*.gif"));
         File selectedFile = fileChooser.showOpenDialog(null);
-
         if (selectedFile != null) {
             String imageURI = selectedFile.toURI().toString();
             Photo photo = CURRENT_USER.searchPhoto(imageURI);
@@ -83,16 +94,18 @@ public class AlbumSceneController {
                 album.addPhoto(photo);
                 photo.addAlbum(album);
             }
-
             // Calculate the new earliest and latest dates
             album.setDate(photo.getDateTaken());
-
             saveUsers();
             displayPhoto(photo);
         }
     }
 
-    // Display the photo in the TilePane
+    /**
+     * The method gets the photo from the album and displays it in a PhotoTile.
+     * The PhotoTile is then added to the TilePane.
+     * @param photo
+     */
     public void displayPhoto(Photo photo) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("PhotoTile.fxml"));
@@ -105,8 +118,9 @@ public class AlbumSceneController {
         }
     }
 
-    // If the user clicks on the Go Back button
-    // Goes back to User Scene
+    /**
+     * If the user clicks on the Back button, goes back to the User Scene.
+     */
     public void goBack() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("UserScene.fxml"));
@@ -123,7 +137,9 @@ public class AlbumSceneController {
         }
     }
 
-    // If the user clicks on the Exit button, exits the program
+    /**
+     * If the user clicks on the Exit button, exits the program.
+     */
     public void exitProgram() {
         System.exit(0);
     }

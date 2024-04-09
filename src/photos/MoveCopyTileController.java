@@ -36,7 +36,16 @@ public class MoveCopyTileController {
     private ScrollPane scrollPane;
     private AnchorPane anchorPane;
 
-    // Runs during the initialization of the MoveCopy Scene
+    /**
+     * Initializes the move/copy tile with the albums and photo.
+     * Sets the name of the album.
+     * @param fromAlbum
+     * @param toAlbum
+     * @param photo
+     * @param albumTileNode
+     * @param scrollPane
+     * @param anchorPane
+     */
     public void initialize(Album fromAlbum, Album toAlbum, Photo photo, Node albumTileNode, ScrollPane scrollPane, AnchorPane anchorPane) {
         this.fromAlbum = fromAlbum;
         this.toAlbum = toAlbum;
@@ -48,8 +57,12 @@ public class MoveCopyTileController {
         nameLabel.setText(toAlbum.getName());
     }
 
-    // Runs when the move button is clicked
-    // Moves the photo from one album to another
+    /**
+     * Moves the photo to the album.
+     * Deletes the photo from the current album and adds it to the new album.
+     * Updates the date of the new album.
+     * Saves the users to the file and returns to the album scene.
+     */
     public void move() {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Move Photo");
@@ -90,6 +103,9 @@ public class MoveCopyTileController {
 
     }
 
+    /**
+     * Copies the photo to a new album
+     */
     public void copy() {
         toAlbum.addPhoto(photo);
         toAlbum.setDate(photo.getDateTaken());

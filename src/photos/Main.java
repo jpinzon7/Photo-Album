@@ -29,10 +29,15 @@ public class Main extends Application {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
 
-    // method for switching to the user scene
+    /**
+     * Switches to the user scene.
+     * Called when the user logs in as a regular user.
+     * Loads the UserScene and sets it on a new stage.
+     * The user's username is passed to the UserSceneController.
+     * The new stage is shown.
+     */
     public void switchToUserScene() {
         try {
             Parent root = FXMLLoader.load(getClass().getResource("UserScene.fxml"));
@@ -46,7 +51,12 @@ public class Main extends Application {
         }
     }
 
-    // method for switching to the admin scene
+    /**
+     * Switches to the admin scene.
+     * Called when the user logs in as an admin.
+     * Loads the AdminScene and sets it on a new stage.
+     * The new stage is shown.
+     */
     public void switchToAdminScene() {
         try {
             Parent root = FXMLLoader.load(getClass().getResource("AdminScene.fxml"));
@@ -60,6 +70,10 @@ public class Main extends Application {
         }
     }
 
+    /**
+     * Main method to launch the application.
+     * @param args
+     */
     public static void main(String[] args) {
         launch(args);
     }

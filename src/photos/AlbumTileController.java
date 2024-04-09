@@ -47,7 +47,13 @@ public class AlbumTileController {
     private Node albumTileNode; // The node for the album tile
     private ScrollPane scrollPane; // The scroll pane for the album tile
 
-    // Runs during the the initialization of the User Scene
+    /**
+     * Initializes the album tile with the album's information.
+     * Sets the album's thumbnail, name, number of photos, earliest date, and latest date.
+     * @param album
+     * @param albumTileNode
+     * @param scrollPane
+     */
     public void initialize(Album album, Node albumTileNode, ScrollPane scrollPane) {
         this.album = album;
         this.albumTileNode = albumTileNode;
@@ -63,27 +69,53 @@ public class AlbumTileController {
         }
     }
 
+    /**
+     * Sets the album thumbnail to the image at the given path.
+     * @param path
+     */
     public void setAlbumThumbnail(String path) {
         albumThumbnail.setImage(new Image(path));
     }
 
+    /**
+     * Sets the album name to the given name.
+     * @param albumName
+     */
     public void setAlbumName(String albumName) {
         this.albumName.setText(albumName);
     }
 
+    /**
+     * Sets the number of photos in the album to the given number.
+     * @param numberPhotos
+     */
     public void setNumberPhotos(int numberPhotos) {
         this.numberPhotos.setText(Integer.toString(numberPhotos));
     }
 
+    /**
+     * Sets the earliest date in the album to the given date.
+     * @param earlyDate
+     */
     public void setEarlyDate(String earlyDate) {
         this.earlyDate.setText(earlyDate);
     }
 
+    /**
+     * Sets the latest date in the album to the given date.
+     * @param lateDate
+     */
     public void setLateDate(String lateDate) {
         this.lateDate.setText(lateDate);
     }
 
-    // If the user clicks on the delete button
+    /**
+     * Deletes the album from the user.
+     * Removes all the photos from the album.
+     * If the photos are not in any other album, removes them from the user.
+     * Removes the album tile from the TilePane.
+     * Changes the scrollbar position to the same position before deleting the album.
+     */
     public void deleteAlbum() {
         // Remove all the photos from the album
         // If they are not in any other album, remove them from the user
@@ -121,7 +153,12 @@ public class AlbumTileController {
         scrollPane.vvalueProperty().addListener(listener);
     }
 
-    // If the user clicks on the rename button
+    /**
+     * Renames the album to the text in the rename field.
+     * Checks if an album with the same name already exists.
+     * If it does, displays a warning dialog.
+     * Otherwise, sets the new name for the album and saves the users.
+     */
     public void renameAlbum() {
         String newAlbumNameText = renameField.getText();
 
@@ -138,16 +175,15 @@ public class AlbumTileController {
             alert.showAndWait();
             return;
         }
-
         // Get the new name from the text field and set it as the new name for the album
         album.setName(renameField.getText());
         Utils.saveUsers();
-
         albumName.setText(album.getName());
     }
 
-    // If the user clicks on the thumbnail of the album
-    // Change the scene to the album scene
+    /**
+     * Opens the album in the Album Scene.
+     */
     public void openAlbum() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("AlbumScene.fxml"));
