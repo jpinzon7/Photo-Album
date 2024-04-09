@@ -1,6 +1,6 @@
-package photos;
+package photos.controller;
 
-import static photos.Utils.convertIntDateToString;
+import static photos.controller.Utils.convertIntDateToString;
 
 import java.io.IOException;
 import java.util.List;
@@ -20,6 +20,9 @@ import javafx.scene.layout.TilePane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import photos.model.Album;
+import photos.model.Photo;
+import photos.model.Tag;
 
 /**
  * This class controls the photo display scene.

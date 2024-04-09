@@ -1,9 +1,10 @@
-package photos;
+package photos.controller;
 
-import static photos.Utils.saveUsers;
+import static photos.controller.Utils.saveUsers;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.TextArea;
+import photos.model.Photo;
 
 public class NewCaptionSceneController {
     @FXML

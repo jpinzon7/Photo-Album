@@ -1,7 +1,7 @@
-package photos;
+package photos.controller;
 
 import static photos.Utils.CURRENT_USER;
-import static photos.Utils.saveUsers;
+import static photos.controller.Utils.saveUsers;
 
 import java.io.File;
 import java.io.IOException;
@@ -19,6 +19,8 @@ import javafx.scene.layout.TilePane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.stage.FileChooser.ExtensionFilter;
+import photos.model.Album;
+import photos.model.Photo;
 import javafx.scene.control.Alert.AlertType;
 
 /**

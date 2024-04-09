@@ -1,4 +1,4 @@
-package photos;
+package photos.controller;
 
 import java.io.*;
 

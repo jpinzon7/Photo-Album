@@ -1,6 +1,6 @@
-package photos;
+package photos.controller;
 
-import static photos.Utils.saveUsers;
+import static photos.controller.Utils.saveUsers;
 
 import java.util.List;
 import java.util.Optional;
@@ -10,6 +10,8 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import photos.model.Photo;
+import photos.model.Tag;
 import javafx.scene.control.ButtonBar;
 
 public class NewTagSceneController {

@@ -1,7 +1,7 @@
-package photos;
+package photos.controller;
 
 import static photos.Utils.CURRENT_USER;
-import static photos.Utils.saveUsers;
+import static photos.controller.Utils.saveUsers;
 
 import java.io.IOException;
 
@@ -18,6 +18,8 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import photos.model.Album;
+import photos.model.Photo;
 
 /**
  * This class controls the photo tile.

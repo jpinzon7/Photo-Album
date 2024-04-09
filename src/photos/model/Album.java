@@ -1,6 +1,7 @@
-package photos;
+package photos.model;
 
-import static photos.Utils.convertIntDateToString;
+import static photos.controller.Utils.convertIntDateToString;
+
 import java.io.Serializable;
 import java.util.*;
 

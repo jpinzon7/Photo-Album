@@ -1,9 +1,10 @@
-package photos;
+package photos.controller;
 
-import static photos.Utils.saveUsers;
 import java.io.IOException;
 import java.util.List;
 import static photos.Utils.CURRENT_USER;
+import static photos.controller.Utils.saveUsers;
+
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -17,6 +18,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.TilePane;
 import javafx.stage.Stage;
+import photos.model.Album;
+import photos.model.Photo;
 
 /**
  * Controller for the search scene.

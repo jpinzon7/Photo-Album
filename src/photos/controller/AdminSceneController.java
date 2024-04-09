@@ -1,4 +1,4 @@
-package photos;
+package photos.controller;
 
 import static photos.Utils.DATA_FILE;
 import javafx.fxml.FXML;
@@ -7,12 +7,14 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import photos.model.User;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import static photos.Utils.USERS;
-import static photos.Utils.saveUsers;
+import static photos.controller.Utils.saveUsers;
+
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;

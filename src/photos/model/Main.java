@@ -1,4 +1,4 @@
-package photos;
+package photos.model;
 
 import java.io.IOException;
 

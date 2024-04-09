@@ -1,4 +1,4 @@
-package photos;
+package photos.model;
 import java.io.Serializable;
 
 public class Tag implements Serializable {

@@ -1,6 +1,6 @@
-package photos;
+package photos.controller;
 
-import static photos.Utils.saveUsers;
+import static photos.controller.Utils.saveUsers;
 
 import java.util.List;
 
@@ -11,6 +11,8 @@ import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.Pane;
+import photos.model.Photo;
+import photos.model.Tag;
 
 /**
  * This class controls the tag tile.

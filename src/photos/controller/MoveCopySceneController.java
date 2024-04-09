@@ -1,4 +1,4 @@
-package photos;
+package photos.controller;
 
 import java.io.IOException;
 
@@ -9,6 +9,8 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.TilePane;
 import javafx.stage.Stage;
+import photos.model.Album;
+import photos.model.Photo;
 
 /**
  * Controller for the move/copy scene.

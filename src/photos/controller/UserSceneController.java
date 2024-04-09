@@ -1,8 +1,8 @@
-package photos;
+package photos.controller;
 
 import static photos.Utils.DATA_FILE;
-import static photos.Utils.saveUsers;
 import static photos.Utils.USERS;
+import static photos.controller.Utils.saveUsers;
 import static photos.Utils.CURRENT_USER;
 import static photos.Utils.CURRENT_ALBUMS;
 
@@ -26,6 +26,9 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.TilePane;
 import javafx.stage.Stage;
+import photos.model.Album;
+import photos.model.Photo;
+import photos.model.User;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;

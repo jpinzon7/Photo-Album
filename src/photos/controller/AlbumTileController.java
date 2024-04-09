@@ -1,4 +1,4 @@
-package photos;
+package photos.controller;
 
 import static photos.Utils.CURRENT_USER;
 
@@ -19,6 +19,8 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import photos.model.Album;
+import photos.model.Photo;
 import javafx.beans.value.ChangeListener;
 
 
