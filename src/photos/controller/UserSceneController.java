@@ -232,8 +232,16 @@ public class UserSceneController {
                 matchingPhotos.add(photo);
             }
         }
-
-        switchToSearchScene(matchingPhotos);
+        if (matchingPhotos.isEmpty()) {
+            Alert alert = new Alert(AlertType.WARNING);
+            alert.setTitle("Warning Dialog");
+            alert.setHeaderText(null);
+            alert.setContentText("No search results found.");
+            alert.showAndWait();
+        } else {
+            switchToSearchScene(matchingPhotos);
+        }
+        
     }
 
     /**
@@ -259,8 +267,16 @@ public class UserSceneController {
                 }
             }
         }
+        if (matchingPhotos.isEmpty()) {
+            Alert alert = new Alert(AlertType.WARNING);
+            alert.setTitle("Warning Dialog");
+            alert.setHeaderText(null);
+            alert.setContentText("No search results found.");
+            alert.showAndWait();
+        } else {
+            switchToSearchScene(matchingPhotos);
+        }
 
-        switchToSearchScene(matchingPhotos);
 
     }
 
