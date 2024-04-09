@@ -2,7 +2,7 @@ package photos.controller;
 
 import java.io.IOException;
 import java.util.List;
-import static photos.Utils.CURRENT_USER;
+import static photos.controller.Utils.CURRENT_USER;
 import static photos.controller.Utils.saveUsers;
 
 import javafx.fxml.FXML;
@@ -61,6 +61,10 @@ public class SearchSceneController {
         }
     }
 
+    
+    /** 
+     * @param searchResults
+     */
     public void setSearchResults(List<Photo> searchResults) {
         this.searchResults = searchResults;
         initialize();
@@ -68,7 +72,7 @@ public class SearchSceneController {
 
     public void displayPhoto(Photo photo) { //display the actual photos in the search results
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("PhotoTile.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/photos/view/PhotoTile.fxml"));
             Node photoTile = loader.load();
             PhotoTileController photoTileController = loader.getController();
             photoTileController.initialize(photo, photo.getAlbums().get(0), photoTile, scrollPane);
@@ -103,7 +107,7 @@ public class SearchSceneController {
     @FXML
     public void goBack() { //go back to the user scene when go back button pressed
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("UserScene.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/photos/view/UserScene.fxml"));
             Parent root = loader.load();
             Scene userScene = new Scene(root);
 

@@ -40,7 +40,7 @@ public class LoginSceneController {
         if (username.equals("admin")) { // If the username is admin, go to the admin scene
             try {
                 // Load the AdminScene
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("AdminScene.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/photos/view/AdminScene.fxml"));
                 Parent root = loader.load();
                 Scene adminScene = new Scene(root);
 
@@ -63,7 +63,7 @@ public class LoginSceneController {
         } else { // If the username is not empty and not admin, go to the user scene
             try {
                 // Load the UserScene
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("UserScene.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/photos/view/UserScene.fxml"));
                 Parent root = loader.load();
                 Scene userScene = new Scene(root);
 

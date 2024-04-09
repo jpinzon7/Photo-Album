@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.TilePane?>
 
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="427.0" prefWidth="326.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="photos.MoveCopySceneController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="427.0" prefWidth="326.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="photos.controller.MoveCopySceneController">
    <children>
       <ScrollPane fx:id="scrollPane" layoutX="3.0" layoutY="3.0" prefHeight="393.0" prefWidth="320.0">
          <content>

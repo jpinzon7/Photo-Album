@@ -1,6 +1,6 @@
 package photos.controller;
 
-import static photos.Utils.CURRENT_USER;
+import static photos.controller.Utils.CURRENT_USER;
 
 import java.io.IOException;
 
@@ -188,7 +188,7 @@ public class AlbumTileController {
      */
     public void openAlbum() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("AlbumScene.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/photos/view/AlbumScene.fxml"));
             Parent root = loader.load();
             Scene albumScene = new Scene(root);
 

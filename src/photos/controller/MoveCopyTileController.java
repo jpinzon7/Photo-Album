@@ -89,7 +89,7 @@ public class MoveCopyTileController {
                 try {
                     Stage stage = (Stage) scrollPane.getScene().getWindow();
                     stage.close();
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource("AlbumScene.fxml"));
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/photos/view/AlbumScene.fxml"));
                     Parent root = loader.load();
                     AlbumSceneController controller = loader.getController();
                     controller.initialize(fromAlbum);

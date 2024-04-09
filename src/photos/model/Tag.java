@@ -10,6 +10,10 @@ public class Tag implements Serializable {
         this.tagValue = tagValue;
     }
 
+    
+    /** 
+     * @return String
+     */
     public String getTagName() {
         return tagName;
     }

@@ -1,6 +1,6 @@
 package photos.controller;
 
-import static photos.Utils.DATA_FILE;
+import static photos.controller.Utils.DATA_FILE;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
@@ -12,7 +12,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
-import static photos.Utils.USERS;
+import static photos.controller.Utils.USERS;
 import static photos.controller.Utils.saveUsers;
 
 import java.io.FileInputStream;
@@ -114,7 +114,7 @@ public class AdminSceneController {
     */
     public void logout() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("LoginScene.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/photos/view/LoginScene.fxml"));
             Parent root = loader.load();
             Scene loginScene = new Scene(root);
 

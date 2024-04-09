@@ -11,12 +11,12 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="200.0" style="-fx-border-color: black;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="photos.AlbumTileController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="200.0" style="-fx-border-color: black;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="photos.controller.AlbumTileController">
    <children>
       <HBox alignment="CENTER" layoutY="1.0" prefHeight="161.0" prefWidth="200.0">
          <children>
             <ImageView fx:id="albumThumbnail" accessibleRole="BUTTON" fitHeight="162.0" fitWidth="162.0" pickOnBounds="true" preserveRatio="true" onMouseClicked="#openAlbum" >
-               <Image url="@../../StockPhotos/no_image.jpeg" />
+               <Image url="@../../../StockPhotos/no_image.jpeg" />
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>

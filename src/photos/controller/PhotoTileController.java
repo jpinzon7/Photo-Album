@@ -1,6 +1,6 @@
 package photos.controller;
 
-import static photos.Utils.CURRENT_USER;
+import static photos.controller.Utils.CURRENT_USER;
 import static photos.controller.Utils.saveUsers;
 
 import java.io.IOException;
@@ -94,7 +94,7 @@ public class PhotoTileController {
     // Switches to the large photo view
     public void switchView() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("PhotoDisplayScene.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/photos/view/PhotoDisplayScene.fxml"));
             Parent root = loader.load();
             Scene photoDisplayScene = new Scene(root);
 

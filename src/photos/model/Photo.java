@@ -37,6 +37,10 @@ public class Photo implements Serializable {
         // this.caption = caption;
     }
 
+    
+    /** 
+     * @return String
+     */
     public String getURIPath() {
         return uriString;
     }

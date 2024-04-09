@@ -1,10 +1,10 @@
 package photos.controller;
 
-import static photos.Utils.DATA_FILE;
-import static photos.Utils.USERS;
+import static photos.controller.Utils.DATA_FILE;
+import static photos.controller.Utils.USERS;
 import static photos.controller.Utils.saveUsers;
-import static photos.Utils.CURRENT_USER;
-import static photos.Utils.CURRENT_ALBUMS;
+import static photos.controller.Utils.CURRENT_USER;
+import static photos.controller.Utils.CURRENT_ALBUMS;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -68,6 +68,10 @@ public class UserSceneController {
     @FXML
     private Button dateSearchButton;
 
+    
+    /** 
+     * @param username
+     */
     // Runs after the user logs in
     // If the user has already logged in and just going back to this page, do not
     // run
@@ -171,7 +175,7 @@ public class UserSceneController {
     public void tileMaker(Album album) {
         System.out.println("Loading album: " + album.getName());
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("AlbumTile.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/photos/view/AlbumTile.fxml"));
             Node albumTile = loader.load();
             AlbumTileController albumTileController = loader.getController();
             albumTileController.initialize(album, albumTile, scrollPane);
@@ -237,7 +241,7 @@ public class UserSceneController {
 
     private void switchToSearchScene(List<Photo> searchResults) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("SearchScene.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/photos/view/SearchScene.fxml"));
             Parent root = loader.load();
 
             // Get the SearchSceneController and pass the search results to it
@@ -256,7 +260,7 @@ public class UserSceneController {
     // Go back to the login scene
     public void logout() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("LoginScene.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/photos/view/LoginScene.fxml"));
             Parent root = loader.load();
             Scene loginScene = new Scene(root);
 

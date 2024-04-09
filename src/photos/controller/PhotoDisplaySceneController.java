@@ -53,6 +53,11 @@ public class PhotoDisplaySceneController {
 
     private Stage popupStage; // The stage for the pop-up windows
 
+    
+    /** 
+     * @param album
+     * @param photoIndex
+     */
     // Runs after the user clicks on a photo
     public void initialize(Album album, int photoIndex) {
         this.album = album;
@@ -68,7 +73,7 @@ public class PhotoDisplaySceneController {
         List<Tag> tags = photo.getTags();
         for (Tag tag : tags) {
             try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("TagTile.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/photos/view/TagTile.fxml"));
                 Node tagNode = loader.load();
                 TagTileController controller = loader.getController();
                 controller.initialize(tag.getTagName(), tag.getTagValue(), photo, tagNode, tagScrollPane);
@@ -126,7 +131,7 @@ public class PhotoDisplaySceneController {
     // It is a pop-up window that allows the user to enter a new caption for the photo
     public void newCaption() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("NewCaptionScene.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/photos/view/NewCaptionScene.fxml"));
             popupStage = new Stage();
 
             Parent root = loader.load();
@@ -149,7 +154,7 @@ public class PhotoDisplaySceneController {
     // It is a pop-up window that allows the user to enter a new tag for the photo
     public void newTag() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("NewTagScene.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/photos/view/NewTagScene.fxml"));
             popupStage = new Stage();
 
             Parent root = loader.load();
@@ -173,7 +178,7 @@ public class PhotoDisplaySceneController {
     // It is a pop-up window that allows the user to move or copy the photo to another album
     public void moveCopy() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("MoveCopyScene.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/photos/view/MoveCopyScene.fxml"));
             popupStage = new Stage();
 
             Parent root = loader.load();
@@ -194,7 +199,7 @@ public class PhotoDisplaySceneController {
     // Goes back to the album scene
     public void goBack() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("AlbumScene.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/photos/view/AlbumScene.fxml"));
             Parent root = loader.load();
             AlbumSceneController controller = loader.getController();
             controller.initialize(album);

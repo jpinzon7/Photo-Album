@@ -30,6 +30,14 @@ public class TagTileController {
     Node tagNode;
     ScrollPane tagScrollPane;
 
+    
+    /** 
+     * @param tagName
+     * @param tagValues
+     * @param photo
+     * @param tagNode
+     * @param tagScrollPane
+     */
     // Runs during the initialization of the Photo Display Scene
     public void initialize(String tagName, String tagValues, Photo photo, Node tagNode, ScrollPane tagScrollPane) {
         this.tagName = tagName;

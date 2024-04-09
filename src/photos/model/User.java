@@ -13,6 +13,10 @@ public class User implements Serializable {
         this.photosMap = new HashMap<>();
     }
 
+    
+    /** 
+     * @return String
+     */
     public String getUsername() {
         return username;
     }

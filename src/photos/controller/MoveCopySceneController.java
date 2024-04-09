@@ -52,7 +52,7 @@ public class MoveCopySceneController {
         for (Album album : Utils.CURRENT_ALBUMS) {
             if (!album.getPhotos().contains(photo)) {
                 try {
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource("MoveCopyTile.fxml"));
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/photos/view/MoveCopyTile.fxml"));
                     Node albumNode = loader.load();
                     MoveCopyTileController controller = loader.getController();
                     controller.initialize(fromAlbum, album, photo, albumNode, scrollPane, anchorPane);

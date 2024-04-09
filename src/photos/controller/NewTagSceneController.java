@@ -27,6 +27,10 @@ public class NewTagSceneController {
     private Photo photo;
 
 
+    
+    /** 
+     * @param photo
+     */
     public void initialize(Photo photo) {
         this.photo = photo;
     }

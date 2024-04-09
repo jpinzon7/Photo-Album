@@ -16,55 +16,20 @@ import javafx.stage.Stage;
  */
 
 public class Main extends Application {
+    
+    /** 
+     * @param primaryStage
+     */
     // starts application at login scene
     @Override
     public void start(Stage primaryStage) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("LoginScene.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/photos/view/LoginScene.fxml"));
             Parent root = loader.load();
             Scene scene = new Scene(root);
             primaryStage.setTitle("Photo Album");
             primaryStage.setScene(scene);
             primaryStage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    /**
-     * Switches to the user scene.
-     * Called when the user logs in as a regular user.
-     * Loads the UserScene and sets it on a new stage.
-     * The user's username is passed to the UserSceneController.
-     * The new stage is shown.
-     */
-    public void switchToUserScene() {
-        try {
-            Parent root = FXMLLoader.load(getClass().getResource("UserScene.fxml"));
-            Scene scene = new Scene(root);
-            Stage stage = new Stage();
-            stage.setTitle("___'s Photo Album");
-            stage.setScene(scene);
-            stage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    /**
-     * Switches to the admin scene.
-     * Called when the user logs in as an admin.
-     * Loads the AdminScene and sets it on a new stage.
-     * The new stage is shown.
-     */
-    public void switchToAdminScene() {
-        try {
-            Parent root = FXMLLoader.load(getClass().getResource("AdminScene.fxml"));
-            Scene scene = new Scene(root);
-            Stage stage = new Stage();
-            stage.setTitle("Admin Photo Album");
-            stage.setScene(scene);
-            stage.show();
         } catch (IOException e) {
             e.printStackTrace();
         }

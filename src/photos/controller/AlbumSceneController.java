@@ -1,6 +1,6 @@
 package photos.controller;
 
-import static photos.Utils.CURRENT_USER;
+import static photos.controller.Utils.CURRENT_USER;
 import static photos.controller.Utils.saveUsers;
 
 import java.io.File;
@@ -110,7 +110,7 @@ public class AlbumSceneController {
      */
     public void displayPhoto(Photo photo) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("PhotoTile.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/photos/view/PhotoTile.fxml"));
             Node photoTile = loader.load();
             PhotoTileController photoTileController = loader.getController();
             photoTileController.initialize(photo, album, photoTile, scrollPane);
@@ -125,7 +125,7 @@ public class AlbumSceneController {
      */
     public void goBack() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("UserScene.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/photos/view/UserScene.fxml"));
             Parent root = loader.load();
             Scene userScene = new Scene(root);
 

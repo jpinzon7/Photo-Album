@@ -1,4 +1,4 @@
-package photos;
+package photos.controller;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -27,6 +27,11 @@ public class Utils {
         }
     }
 
+    
+    /** 
+     * @param date
+     * @return String
+     */
     // Convert a date obtained from Calendar to a string
     public static String convertIntDateToString(int date) {
         String dateStr = Integer.toString(date);
